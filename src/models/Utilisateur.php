@@ -1,6 +1,7 @@
 <?php
+require_once '../../vendor/autoload.php';
 
-use Dotenv\Util\Str;
+use App\Role;
 
 class Utilisateur{
 
@@ -12,7 +13,7 @@ class Utilisateur{
     private string $phone;
     private string $photo;
     private bool $is_active;
-    private string $role;
+    private Role $role;
 
     public function  __construct()
     {
@@ -81,7 +82,14 @@ class Utilisateur{
     public function setPhoto(string $photo):void {
         $this->photo = $photo;
     }
-
+    public function getRole(): string
+    {
+        return $this->role;
+    } 
+    public function setRole($role): void
+    {
+        $this->role = $role;
+    }
 
     public function getId(): int{
         return $this->id;
