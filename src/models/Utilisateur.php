@@ -1,7 +1,10 @@
 <?php
-require_once '../../vendor/autoload.php';
+//   namespace App;
+//  require_once '../../vendor/autoload.php';
 
-use App\Role;
+//  use App\Role;
+
+require_once 'Role.php';
 
 class Utilisateur{
 
@@ -23,7 +26,7 @@ class Utilisateur{
     }
 
     public function __call($name, $arguments) {
-        if($name == "Builder"){
+        if($name == "BuilderUser"){
             if(count($arguments) == 2){
                 $this->email = $arguments[0];
                 $this->password = $arguments[1];
@@ -48,6 +51,13 @@ class Utilisateur{
                 $this->role = $arguments[8];
 
             } 
+            if(count($arguments) == 4){
+                $this->id = $arguments[0];
+                $this->firstname = $arguments[1];
+                $this->lastname = $arguments[2];
+                $this->role = $arguments[3];
+
+            }
         }
     }
 
@@ -130,9 +140,9 @@ class Utilisateur{
 
 
 
-$builder = new Utilisateur;
-$builder->Builder("admin@gmail.com","adminLOve");
-var_dump($builder);
+// $builder = new Utilisateur;
+// $builder->Builder("admin@gmail.com","adminLOve");
+// var_dump($builder);
 
 
 // $builder1 = new Utilisateur;

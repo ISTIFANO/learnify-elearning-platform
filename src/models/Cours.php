@@ -1,5 +1,13 @@
 <?php 
-     
+//  namespace App;
+// require_once '../../vendor/autoload.php';
+
+//  use App\Tag;
+//  use App\Categorie;
+
+     require_once 'Categorie.php';
+ 
+
 
     class Cours
     {
@@ -16,6 +24,9 @@
 
         public function __construct()
         {
+$this->categorie = new Categorie();
+// $this->etudiants = new Utilisateur();
+
 
         }
         public function __call($name, $arguments) {
@@ -143,3 +154,5 @@
 
 
     }
+
+
