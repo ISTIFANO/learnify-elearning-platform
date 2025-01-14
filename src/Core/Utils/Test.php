@@ -26,10 +26,26 @@ class Test{
     }
     
     public function TestCours() {
-        $rolez = new Role;
-        $rolez->TagBuilder("testTags","TagsTZZZESZ",$rolez);
-    
-        // var_dump($rolez);
+        $Roleuser = new Role;
+        $Roleuser->RoleBuilder("testTags","TagsTZZZESZ");
+
+        $user22 = new Utilisateur;
+
+        $user22->BuilderUser(1,"admin@gmihsdhl.com","adsdLOve", $Roleuser);
+        
+       var_dump($user22);
+
+
+
+
+
+
+
+
+
+
+
+
         $user = new Utilisateur;
         $user->BuilderUser("admin@gmihsdhl.com","adsdLOve",);
         // $user->setEmail("admin@gmihsdhl.com");
