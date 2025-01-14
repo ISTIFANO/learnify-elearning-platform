@@ -17,6 +17,7 @@
          private string $contenue;
         private Categorie $categorie;
         private  $etudiants = [];
+        private Utilisateur $teacher;
         private array $tags = [];
         private string $photo;
 
@@ -54,7 +55,7 @@
 
             $this->photo = $arguments[7];
                      } 
-                     
+
                    
             }
         }
