@@ -32,23 +32,34 @@ class Test{
         // var_dump($rolez);
         $user = new Utilisateur;
         $user->BuilderUser("admin@gmihsdhl.com","adsdLOve",);
+        // $user->setEmail("admin@gmihsdhl.com");
         var_dump($user);
-        $tagsA = new Tag;
-        $tagsA->TagBuilder("testTags","TagsTZZZESZ");
-    
+        $tagsA = [];
+        $name = new Tag;
+        $name->TagBuilder("testTags","TagsTZZZESZ");
+        $tagsA []= $name ; 
+        
         // var_dump($tagsA);
    
     
         $cat = new Categorie;
         $cat->CategorieBuilder(1,"testCATEGORIE","TestshCat");
-    
+        var_dump($cat);
     // var_dump($cat);
     
-    $builder = new Cours;
+    $builder = new Cours;   
     
-    $builder->CoursBuilder(1,"Le Roi","azertyuiop","video.mp4",$cat,$user,   $tagsA ,"cover.png");
-    var_dump($builder);
-    
+   $builder->CoursBuilder(1,"Le Roi","azertyuiop","video.mp4",$cat,$user,   $tagsA ,"cover.png");
+   var_dump($builder);
+    // return  $uduu;
+    // private int $id;
+    // private string $titre;
+    // private string $description;
+    //  private string $contenue;
+    // private Categorie $categorie;
+    // private  $etudiants = [];
+    // private array $tags = [];
+    // private string $photo;
         
     }
 
@@ -57,7 +68,7 @@ class Test{
 
 $cours = new Test;
 $cours->TestCours();
-
+var_dump($cours);
 
 
 

@@ -24,7 +24,7 @@
 
         public function __construct()
         {
-$this->categorie = new Categorie();
+// $this->categorie = new Categorie();
 // $this->etudiants = new Utilisateur();
 
 
@@ -41,18 +41,21 @@ $this->categorie = new Categorie();
                     $this->titre = $arguments[1];
                     $this->description = $arguments[2];
                 } 
-                if(count($arguments) == 7){
-                    $this->id = $arguments[0];
+                if(count($arguments) == 8){
+            $this->id = $arguments[0];
             $this->titre = $arguments[1];
             $this->description =$arguments[2];
-            $this->categorie =$arguments[3];
-            $this->etudiants = $arguments[4];   
+            $this->contenue =$arguments[3];
+            $this->categorie =$arguments[4];
 
-            $this->tags = $arguments[5];   
+            $this->etudiants = $arguments[5];   
 
-            $this->photo = $arguments[6];
+            $this->tags = $arguments[6];   
+
+            $this->photo = $arguments[7];
                      } 
-              
+                     
+                   
             }
         }
     
