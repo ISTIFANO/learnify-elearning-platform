@@ -1,9 +1,5 @@
 <?php 
-
-
-
-
-class Database {
+class Database{
     private static $servername = "localhost";
     private static $username = "root";
     private static $password = "";
@@ -50,11 +46,11 @@ class Database {
 
 
 
-// $db =Database::getInstance()->getConnection();
+$db =Database::getInstance()->getConnection();
 
-// if($db){
-//     echo"<h1>database has been connected </h1>";
-// }
+if($db){
+    echo"<h1>database has been connected</h1>";
+}
 
 
 

@@ -1,13 +1,14 @@
 <?php
+ define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
 
-// namespace App;
-// require_once '../../vendor/autoload.php';
+require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 
-// use App\Etiquette;
-require_once 'Etiquette.php';
-class Categorie extends Etiquette
-{ 
-    public function __construct(){}
+class Categorie extends DaoGenerator { 
+    private int $id;
+    private string $name;
+    private string $description;
+
+    public function __construct() {}
 
     public function __call($name, $arguments) {
         if($name == "CategorieBuilder"){
@@ -23,12 +24,28 @@ class Categorie extends Etiquette
                 $this->name = $arguments[1];
                 $this->description = $arguments[2];
             } 
-          
         }
     }
 
-    public function __toString() {
-        return parent::__toString();
+    public function tablename(): string {
+        return 'categories';
     }
 
+    public function columns(): array {
+        return [
+            "name" => $this->name,
+            "description" => $this->description
+        ];
+    }
+
+    public function getId(): int {
+         return $this->id;
+     }
+    public function getName(): string { 
+        return $this->name;
+     }
+    public function getDescription(): string { 
+        return $this->description; 
+    }
 }
+?>

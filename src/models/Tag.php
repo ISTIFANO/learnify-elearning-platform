@@ -1,13 +1,11 @@
-<?php
+<?php require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 
+class Tag extends DaoGenerator {
+    private int $id;
+    private string $name;
+    private string $description;
 
-// namespace App;
-//  require_once '../../vendor/autoload.php';
-//  use App\Etiquette;
-require_once 'Etiquette.php';
-class Tag extends Etiquette
-{ 
-    public function __construct(){}
+    public function __construct() {}
 
     public function __call($name, $arguments) {
         if($name == "TagBuilder"){
@@ -22,18 +20,29 @@ class Tag extends Etiquette
                 $this->id = $arguments[0];
                 $this->name = $arguments[1];
                 $this->description = $arguments[2];
-                
             } 
-          
         }
     }
 
-    public function __toString() {
-        return parent::__toString();
+    public function tablename(): string {
+        return 'tags';
     }
 
-}
-    // $tagsA = new Tag;
-    // $tagsA->TagBuilder(1,"testTags","TagsTZZZESZ");
+    public function columns(): array {
+        return [
+            "name" => $this->name,
+            "description" => $this->description
+        ];
+    }
 
-    // var_dump($tagsA);
+    public function getId(): int {
+         return $this->id; 
+    }
+    public function getName(): string {
+         return $this->name; 
+    }
+    public function getDescription(): string {
+         return $this->description;
+     }
+}
+?>
