@@ -52,7 +52,7 @@ return $RoleuserDeleted ;
     {
 
         $Roleuser = $this->reposetery->findOne($this->role,$id);
-
+// var_dump( $Roleuser);
         return $Roleuser;
     }
  

@@ -16,13 +16,13 @@ class UserServices
     public function __construct()
     {
         $this->reposetery = new RepositoryGenerator;
+        $this->roleServices = new RoleServices;
     }
 
     public function create($user){
 if(!empty($user->getEmail())){
 
 $CreateUser =$user->setId($this->reposetery->create($user));
-
 
 return $CreateUser;
 }
@@ -42,11 +42,17 @@ return $userDeleted ;
     public function findAll()
     {
 
+        echo "#####################################################";
+
         $user = $this->reposetery->findAll("utilisateurs");
+        var_dump($user);
         foreach ($user  as $users) {
- $users->SetRole($this->roleServices->findRoleByid($users->getRoleId()))  ;
+            $idrole = $this->roleServices->findRoleByid($users->getRoleId());
+ $users->setRoleId($idrole)  ;
+//  var_dump($test);
      }
-//         return $user;
+     var_dump($users);
+     return $user;
     }
     public function findbyId($id)
     {

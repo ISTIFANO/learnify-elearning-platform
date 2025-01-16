@@ -18,6 +18,7 @@ class UserController{
 
     public function getAllUsers(){
         try {
+            echo "i m in getAllUsers ";
                       return   $this->userservice->findAll();
          }
          catch(Exception $e){
@@ -42,13 +43,12 @@ class UserController{
 
     }
 }
-// $userr = new UserController ;
+ $userr = new UserController ;
 // //  $userr->getbyName() ;
-// $use = $userr->getAllUsers();
-// echo $use->getLatsname();
-// $varArr =$userr->getAllUsers();
+ $userr->getAllUsers();
+ var_dump($userr);
+//  $varArr =$userr->getAllUsers();
 
-// var_dump($varArr);
 // var_dump($use);
 // echo 'jdsjn';
 //  var_dump($use);

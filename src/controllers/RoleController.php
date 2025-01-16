@@ -65,10 +65,10 @@ class RoleController{
 }
 
 
-// $role = new RoleController;
+$role = new RoleController;
 
-// $resultat =$role->FindById();
+$resultat =$role->FindById();
 
-// var_dump($resultat);
+var_dump($resultat);
 
 ?>

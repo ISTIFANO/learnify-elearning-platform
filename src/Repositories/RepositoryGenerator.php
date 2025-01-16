@@ -26,7 +26,7 @@ public function update($table,$id){
     return $table->update($id);
 }
 public function findOne($table,$id){
-    var_dump($table);
+    //  var_dump($table);
     return $table->FindById($id);
 }
 
