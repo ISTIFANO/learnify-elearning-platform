@@ -20,7 +20,7 @@ class Role extends DaoGenerator {
                 $this->role_description = $arguments[2];
             }
             if(count($arguments) == 1){
-                $this->id = $arguments[0];
+                $this->role_name = $arguments[0];
             }
         }
     }

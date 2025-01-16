@@ -3,7 +3,7 @@
 
 require_once 'Role.php';
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
-
+#[\AllowDynamicProperties]
 class Utilisateur extends DaoGenerator {
     private int $id;
     private string $firstname;
@@ -14,9 +14,11 @@ class Utilisateur extends DaoGenerator {
     private string $photo;
     private string $is_active;
     private Role $role;
+    private int $role_id;
 
-    public function __construct() {}
-
+    public function __construct() {
+        // $this->role=new Role;à
+    }
     public function __call($name, $arguments) {
         if($name == "BuilderUser"){
             if(count($arguments) == 2){
@@ -59,7 +61,6 @@ class Utilisateur extends DaoGenerator {
         ];
     }
 
-    // Getters and setters
     public function setId(int $id): void { 
         $this->id = $id;
      }
@@ -108,9 +109,12 @@ class Utilisateur extends DaoGenerator {
     public function setIsValide(string $is_active): void { 
         $this->is_active = $is_active; 
     }
-    public function getIsValide(): bool {
+    public function getIsValide(): string {
          return $this->is_active; 
     }
+    public function getRoleId(): int {
+        return $this->role_id; 
+   }
     public function setRole(Role $role): void {
          $this->role = $role; 
     }

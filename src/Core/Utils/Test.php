@@ -1,109 +1,106 @@
-<?php 
+<?php
 
 require_once  '../../models/Categorie.php';
 require_once '../../models/Tag.php';
-
-
 require_once '../../models/Role.php';
-
 require_once '../../models/Utilisateur.php';
 require_once '../../models/Cours.php';
 require_once '../../DAOs/DaoGenerator.php';
 
-// require_once  '../../../vendor/autoload.php'; 
-// use App\Utilisateur;
-// use App\Tag;
-// use App\Categorie;
-// use App\Role;
-// use App\Cours;
+// class Test for testing purposes
+class Test {
 
-
-class Test{
-
-    public function __construct()
-    {
-        
+    public function __construct() {
+        // Constructor if needed (currently not used)
     }
-    
+
     public function TestCours() {
-        $Roleuser = new Role;
-        $Roleuser->RoleBuilder("testTags","TagsTZZZESZ");
+        //  role 
+        $roleUser = new Role;
+        $roleUser->RoleBuilder("testTags", "TagsTZZZESZ");
 
+        //  user 
         $user22 = new Utilisateur;
+        $user22->BuilderUser(7, "admin@gmihsdhl.com", "adsdLOve", $roleUser);
+        var_dump($user22);
 
-        $user22->BuilderUser(1,"admin@gmihsdhl.com","adsdLOve", $Roleuser);
-
-    //    var_dump($user22);
-
+        // user
         $user = new Utilisateur;
-        $user->BuilderUser("admin@gmihsdhl.com","adsdLOve",);
-        // $user->setEmail("admin@gmihsdhl.com");
+        $user->BuilderUser(7,"admin@gmihsdhl.com", "adsdLOve");
         var_dump($user);
-        $tagsA = [];
-        $name = new Tag;
-        $name->TagBuilder("testTags","TagsTZZZESZ");
-        $tagsA []= $name ; 
-        
-        // var_dump($tagsA);
-   
-    
-        $cat = new Categorie;
-        $cat->CategorieBuilder(1,"testCATEGORIE","TestshCat");
-        var_dump($cat);
-    // var_dump($cat);
-    
-    $builder = new Cours;   
-    var_dump($builder);
-   $builder->CoursBuilder(1,"Le Roi","azertyuiop","video.mp4",$cat,$user,   $tagsA ,"cover.png");
-   var_dump($builder);
-    // return  $uduu;
-    // private int $id;
-    // private string $titre;
-    // private string $description;
-    //  private string $contenue;
-    // private Categorie $categorie;
-    // private  $etudiants = [];
-    // private array $tags = [];
-    // private string $photo;
-        
-    }
+        $utidiants = [];
+        $utidiants[]=$user22;
 
+        //tags
+        $tagsA = [];
+        $tagName = new Tag;
+        $tagName->TagBuilder(1,"testTags", "TagsTZZZESZ");
+        $tagsA[] = $tagName;
+
+        //category
+        $category = new Categorie;
+        $category->CategorieBuilder(1, "testCATEGORIE", "TestshCat");
+        var_dump($category);
+
+        
+        $user11 = new Utilisateur;
+        $user11->BuilderUser(3,"admin@gmihsdhl.com", "adsdLOve");
+        $userEtud = [];
+        $userEtud[] = $user11;
+        var_dump($userEtud);
+        // $this->id = $arguments[0];
+        // $this->titre = $arguments[1];
+        // $this->description = $arguments[2];
+        // $this->contenue = $arguments[3];
+        // $this->categorie = $arguments[4];
+        // $this->etudiants = $arguments[5];   
+        // $this->teacher = $arguments[6];   
+
+        // $this->tags = $arguments[7];   
+        // $this->photo = $arguments[8];
+        // course
+      
+
+        // role
+        $role = new Role;
+        $role->RoleBuilder(3, "testTags", "RagsTZZZESZ");
+        $userq = new Utilisateur();
+        $userq->BuilderUser(
+            3, 
+            "john@example.com", 
+            "password123", 
+            "password123", 
+            "sdsdd", 
+            2345678, 
+            "photo.png", 
+            "pending", 
+            $role
+        );
+        var_dump($userq);
+        $builder = new Cours;
+        $builder->CoursBuilder(
+            21,
+            "Le Roi",
+            "azertyuiop",
+            "video4",
+            $category,
+            $utidiants,
+            $user,  
+            $tagsA,
+            "cover.png"
+        );
+  
+        var_dump($builder);
+
+        // $ver =$builder->create();
+        // var_dump($ver);
+
+    }
 }
 
-
 $cours = new Test;
-// $cours->TestCours();
+$cours->TestCours();
 
 var_dump($cours);
-// private int $id;
-// private string $firstname;
-// private string $lastname;
-// private string $email;
-// private string $password;
-// private string $phone;
-// private string $photo;
-// private string $is_active;
-// private Role $role;
-
-$role = new Role;
-$role->RoleBuilder(1,"testTags","TagsTZZZESZ");
-$userq = new Utilisateur();
-$userq->BuilderUser(1,"john@example.com", "password123","password123","sdsdd",2345678,"phoyo.png","panding",$role);
-var_dump($userq);
-$userq->delete(1);
-
-var_dump($userq);
-// $coursDao = new Cours();
-// $coqurs->CoursBuilder("Title", "Description");
-// $coqurs->create();
-
-
-
-
-
-
-
-
-
 
 ?>

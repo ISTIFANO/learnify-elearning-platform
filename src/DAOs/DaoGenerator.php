@@ -15,22 +15,31 @@ abstract class DaoGenerator {
         $values = array_values($columns);
 
         $sql = "INSERT INTO $table ($columnNames) VALUES ($placeholders)";
+        var_dump( $sql );
+        var_dump( $values );
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
-            return $stmt->execute($values);
+             $stmt->execute($values);
+          $id=  Database::getInstance()
+->getConnection()
+->lastInsertId();
+return $id;
         } catch (Exception $e) {
             return false;
         }
     }
+    
 
     public function FindById(int $id) {
         $table = $this->tablename();
         $sql = "SELECT * FROM $table WHERE id = ?";
-
+        var_dump($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($resultat);
+            return $resultat;
         } catch (Exception $e) {
             return null;
         }
