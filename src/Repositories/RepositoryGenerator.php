@@ -31,6 +31,8 @@ public function findOne($table,$id){
 }
 
 public function findAll($table) {
+
+
     $sql = "SELECT * FROM $table";
 var_dump($sql);
     try {
@@ -39,8 +41,14 @@ var_dump($sql);
 
         $stmt->execute();
         var_dump($stmt);
-$class = ucfirst(substr($table , 0 ,-1));
-var_dump($class);
+        if ($table !== 'cours') {
+            $class = ucfirst(substr($table, 0, -1));            
+            var_dump($class);
+        }else{
+            $class = ucfirst($table);            
+
+        }
+        
 $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
 // var_dump($result);
 return $result;

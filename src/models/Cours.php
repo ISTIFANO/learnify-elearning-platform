@@ -2,6 +2,7 @@
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 require_once 'Categorie.php';
 require_once 'Utilisateur.php';
+#[\AllowDynamicProperties]
 
 class Cours extends DaoGenerator {
     private int $id;
@@ -14,7 +15,9 @@ class Cours extends DaoGenerator {
     private array $tags = [];
     private string $photo;
 
-    public function __construct() {}
+    public function __construct() {
+     // $this->categorie= new Categorie;
+    }
 
     public function __call($name, $arguments) {
         if($name == "CoursBuilder"){

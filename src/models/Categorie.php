@@ -1,5 +1,5 @@
 <?php
- define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
+//  define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
 
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 
