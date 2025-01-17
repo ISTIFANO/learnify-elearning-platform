@@ -2,6 +2,7 @@
 //  define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
 
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+#[\AllowDynamicProperties]
 
 class Categorie extends DaoGenerator { 
     private int $id;

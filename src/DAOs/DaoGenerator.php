@@ -33,12 +33,12 @@ return $id;
     public function FindById(int $id) {
         $table = $this->tablename();
         $sql = "SELECT * FROM $table WHERE id = ?";
-        var_dump($sql);
+        // var_dump($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute([$id]);
             $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($resultat);
+            // var_dump($resultat);
             return $resultat;
         } catch (Exception $e) {
             return null;

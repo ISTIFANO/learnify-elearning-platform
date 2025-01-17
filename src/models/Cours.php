@@ -2,7 +2,7 @@
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 require_once 'Categorie.php';
 require_once 'Utilisateur.php';
-#[\AllowDynamicProperties]
+ #[\AllowDynamicProperties]
 
 class Cours extends DaoGenerator {
     private int $id;
@@ -16,7 +16,7 @@ class Cours extends DaoGenerator {
     private string $photo;
 
     public function __construct() {
-     // $this->categorie= new Categorie;
+$this->categorie= new Categorie;
     }
 
     public function __call($name, $arguments) {
@@ -93,6 +93,8 @@ class Cours extends DaoGenerator {
     }
     public function getEtudiants(): array { 
         return $this->etudiants; 
+
+
     }
     public function setEtudiants(array $etudiants): void {
          $this->etudiants = $etudiants; 
@@ -108,6 +110,9 @@ class Cours extends DaoGenerator {
     }
     public function setPhoto($photo): void {
          $this->photo = $photo; 
+    }
+    public function setTeacher(Utilisateur $teacher){
+     $this->teacher = $teacher ; 
     }
 
     public function __toString() {

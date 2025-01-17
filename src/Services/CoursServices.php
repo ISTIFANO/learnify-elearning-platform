@@ -6,6 +6,8 @@ require_once PROJECT_ROOT . '\models\Cours.php';
 require_once PROJECT_ROOT . '\Services\CategorieServices.php';
 require_once PROJECT_ROOT . '\Services\UserServices.php';
 require_once PROJECT_ROOT . '\Services\TagServices.php';
+require_once PROJECT_ROOT . '\Services\RoleServices.php';
+
 
 class CoursServices {
     private Cours $cours;
@@ -13,12 +15,14 @@ class CoursServices {
     private CategorieServices $categorieServices;
     private UserServices $userServices;
     //  private TagServices $tagServices;
-
+private RoleServices $roleServices;
     public function __construct() {
         $this->cours = new Cours();
         $this->repository = new RepositoryGenerator();
         $this->categorieServices = new CategorieServices();
         $this->userServices = new UserServices();
+        $this->roleServices = new roleServices();
+
         // $this->tagServices = new TagServices();
     }
 
@@ -33,9 +37,15 @@ class CoursServices {
 
     public function getByFields($field, $value) {
         $courses = $this->repository->findByField($field, $value, "cours");
-        return $this->loadCourseRelationships($courses);
-    }
 
+        var_dump($courses);
+        return $this->surchargeCours($courses);
+    }
+    public function findByFieldSearch($field, $value) {
+        $courses = $this->repository->findByFieldSearch($field, $value, "cours");
+        // var_dump($courses);
+        return $this->surchargeCours($courses);
+    }
     
     public function deleteCours($id) {
         return $this->repository->delete("cours", $id);
@@ -43,18 +53,54 @@ class CoursServices {
 
     public function findAll() {
         $courses = $this->repository->findAll("cours");
-        var_dump($courses);
-        return $this->loadCourseRelationships($courses);
+        foreach($courses as $cour){
+            // ($cour->categorie_id);
+            // echo $cour->categorie_id ;
+               $category =  $this->categorieServices->findCategorieById($cour->categorie_id);
+            //    var_dump();
+               $categorie1 = new Categorie ; 
+               $categorie1->CategorieBuilder($category['id'], $category['name'] , $category['description']);
+              var_dump($cour->user_id);
+               $user =   $this->userServices->findbyId($cour->user_id);
+               
+
+                        //    $user =   $this->userServices->findbyId($cour->user_id);
+
+                  $user1 = new Utilisateur ;
+                // //   var_dump( $user );
+                  $user1->BuilderUser($user['id'],$user['firstname'],$user['lastname'],$user['email'],$user['password'],$user['phone'],$user['photo'],$user['is_active']) ;
+                  $cour->setTeacher($user1);
+                  $cour->setCategorie($categorie1);
+                 return $cour ; 
+                //   $CoursHasIduser = $this->findCoursById($user['id']);
+                //   var_dump( $CoursHasIduser);   
+        }
+        // return $courses;
+        // $categorie = new Categorie ; 
+        // $categorie->CategorieBuilder();
+    
+        // echo "####################";
+        // var_dump($courses);
+        // return $this->surchargeCours($courses);
+    }
+    public function findCoursByid($id)
+    {
+
+        $CoursById = $this->repository->FindCoursById($this->cours,$id);
+ var_dump( $CoursById);
+        return $CoursById;
     }
 
  
-    public function findCoursById($id) {
-        $cours = $this->repository->findOne($this->cours, $id);
-        if ($cours) {
-            return $this->loadCourseRelationships([$cours])[0];
-        }
-        return null;
-    }
+    // public function findCoursById($id) {
+
+
+    //     $cours = $this->repository->findOne($this->cours, $id);
+    //     if ($cours) {
+    //         return $this->surchargeCours([$cours])[0];
+    //     }
+    //     return null;
+    // }
 
     public function updateCours($cours, $id) {
         if (!empty($cours->getTitre())) {
@@ -121,14 +167,14 @@ var_dump( $stmt);
         return $this->repository->count("cours");
     }
 
-    private function loadCourseRelationships($courses) {
+    private function surchargeCours($courses) {
         foreach ($courses as $cours) {
             $categorie = $this->categorieServices->findCategorieById($cours->getCategorie()->getId());
             $cours->setCategorie($categorie);
-
             $teacher = $this->userServices->findById($cours->getTeacher()->getId());
             $cours->setTeacher($teacher);
-
+            echo"#########################";
+            var_dump($cours);
             $students = $this->getStudentsForCourse($cours->getId());
             $cours->setEtudiants($students);
 

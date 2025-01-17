@@ -21,12 +21,17 @@ class RepositoryGenerator{
 
     return $table->delete($id);
 }
+public function FindCoursById($table,$id){
+// var_dump($table);
+    return $table->FindById($id);
+}
 public function update($table,$id){
 
     return $table->update($id);
 }
 public function findOne($table,$id){
-    //  var_dump($table);
+     
+   
     return $table->FindById($id);
 }
 
@@ -48,24 +53,29 @@ var_dump($sql);
             $class = ucfirst($table);            
 
         }
-        
+        // $result= $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
-// var_dump($result);
 return $result;
     } catch (Exception $e) {
         return [];
     }
 }
 public function findByField(string $field, $value,$table) {
-   
-    $sql = "SELECT * FROM $table WHERE $field = ?";
-
+//    echo $field, $value,$table;
+    $sql = "SELECT * FROM $table WHERE $field ='".$value."'";
+var_dump($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
-        $stmt->execute([$value]);
+        $stmt->execute();
         var_dump($stmt);
-        $class = ucfirst(substr($table , 0 ,-1));
-        var_dump($class);
+        if ($table !== 'cours') {
+            $class = ucfirst(substr($table, 0, -1));            
+            var_dump($class);
+        }else{
+            $class = ucfirst($table);            
+
+        }
         $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
         var_dump($result);
         return $result;
@@ -74,6 +84,29 @@ public function findByField(string $field, $value,$table) {
         return [];
     }
 }
+public function findByFieldSearch(string $field, $value,$table) {
+      echo $field, $value,$table;
+        $sql = "SELECT * FROM $table WHERE $field $value";
+    var_dump($sql);
+        try {
+            $stmt = Database::getInstance()->getConnection()->prepare($sql);
+            $stmt->execute();
+            var_dump($stmt);
+            if ($table !== 'cours') {
+                $class = ucfirst(substr($table, 0, -1));            
+                var_dump($class);
+            }else{
+                $class = ucfirst($table);            
+    
+            }
+            $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
+            var_dump($result[0]);
+            return $result;
+    
+        } catch (Exception $e) {
+            return [];
+        }
+    }
 
 public function count($table) {
     $sql = "SELECT COUNT(*) as count FROM $table";
@@ -85,9 +118,20 @@ public function count($table) {
     } catch (Exception $e) {
         return 0;
     }
+
+ 
 }
 
+public static function verificationClases($table){
+    if ($table !== 'cours') {
+        $class = ucfirst(substr($table, 0, -1));            
+        var_dump($class);
+    }else{
+        $class = ucfirst($table);            
 
+    }
+    return  $class;
+}
 
 
 

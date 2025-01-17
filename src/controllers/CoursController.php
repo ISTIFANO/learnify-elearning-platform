@@ -36,6 +36,8 @@ class CoursController {
             if (!$course) {
                 return ['error' => 'Course not found'];
             }
+
+          
             return $course;
         } catch(Exception $e) {
             return ['error' => $e->getMessage()];
@@ -174,10 +176,22 @@ class CoursController {
   
     public function searchCourses($keyword) {
         try {
-            return $this->coursServices->getByFields('titre', "%$keyword%");
+            $search = "LIKE '%" . $keyword . "%'";
+            // var_dump(  $search);
+            $resultat =  $this->coursServices->findByFieldSearch('titre', "$search");
+
+            var_dump( $resultat);
+            return $resultat;
         } catch(Exception $e) {
             return ['error' => $e->getMessage()];
         }
+    }
+    public function read(){
+  
+       
+   $user= $this->coursServices->findAll();
+    var_dump( $user);
+
     }
 } 
 
@@ -193,10 +207,10 @@ $coursController = new CoursController();
 //     'tags' => [1, 2, 3]
 // ]);     
 
-//   $coursController->getAllCourses();
+   $coursController->read();
 
 // // Rechercher des cours
-// $courses = $coursController->searchCourses('Introduction to Web Development');
+// $courses = $coursController->searchCourses('Python Programming');
 
 
 

@@ -9,12 +9,12 @@ require_once PROJECT_ROOT . '\Services\RoleServices.php';
 class UserServices
 {
 
-    // private Role $role;
+    private Utilisateur $Utilisateur;
     private RepositoryGenerator $reposetery;
     private RoleServices $roleServices;
 
     public function __construct()
-    {
+    { $this->Utilisateur= new Utilisateur;
         $this->reposetery = new RepositoryGenerator;
         $this->roleServices = new RoleServices;
     }
@@ -35,7 +35,7 @@ return $CreateUser;
     }
 public function DeleteUsers($id){
     
-$userDeleted =$this->reposetery->delete("utilisateurs",$id);
+$userDeleted =$this->reposetery->delete($this->Utilisateur,$id);
 
 return $userDeleted ;
 }
@@ -56,9 +56,9 @@ return $userDeleted ;
     }
     public function findbyId($id)
     {
+        $user = $this->reposetery->findOne($this->Utilisateur,$id);
 
-        $user = $this->reposetery->findOne("utilisateurs",$id);
-
+// var_dump(  $user);
         return $user;
     }
     public function countusers($table){

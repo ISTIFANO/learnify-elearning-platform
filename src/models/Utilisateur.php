@@ -41,6 +41,16 @@ class Utilisateur extends DaoGenerator {
                 $this->is_active = $arguments[7];
                 $this->role = $arguments[8];
             }
+            if(count($arguments) == 8){
+                $this->id = $arguments[0];
+                $this->firstname = $arguments[1];
+                $this->lastname = $arguments[2];
+                $this->email = $arguments[3];
+                $this->password = $arguments[4];
+                $this->phone = $arguments[5];
+                $this->photo = $arguments[6];
+                $this->is_active = $arguments[7];
+            }
         }
     }
 

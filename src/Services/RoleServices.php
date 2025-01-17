@@ -2,7 +2,6 @@
 
 
 require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-//  require_once PROJECT_ROOT . '\DAOs\DaoGenerator.php';
 
 
 

@@ -18,7 +18,7 @@ class UserController{
 
     public function getAllUsers(){
         try {
-            echo "i m in getAllUsers ";
+            // echo "i m in getAllUsers ";
                       return   $this->userservice->findAll();
          }
          catch(Exception $e){
