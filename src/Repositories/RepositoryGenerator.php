@@ -14,7 +14,7 @@ class RepositoryGenerator{
     }
 
     public function create($table){
-
+// var_dump($table);
         return $table->create();
   }
   public function delete($table,$id){
@@ -39,16 +39,16 @@ public function findAll($table) {
 
 
     $sql = "SELECT * FROM $table";
-var_dump($sql);
+// var_dump($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         // var_dump($stmt);
 
         $stmt->execute();
-        var_dump($stmt);
+        // var_dump($stmt);
         if ($table !== 'cours') {
             $class = ucfirst(substr($table, 0, -1));            
-            var_dump($class);
+            // var_dump($class);
         }else{
             $class = ucfirst($table);            
 
@@ -64,20 +64,20 @@ return $result;
 public function findByField(string $field, $value,$table) {
 //    echo $field, $value,$table;
     $sql = "SELECT * FROM $table WHERE $field ='".$value."'";
-var_dump($sql);
+// var_dump($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
-        var_dump($stmt);
+        // var_dump($stmt);
         if ($table !== 'cours') {
             $class = ucfirst(substr($table, 0, -1));            
-            var_dump($class);
+            // var_dump($class);
         }else{
             $class = ucfirst($table);            
 
         }
         $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
-        var_dump($result);
+        // var_dump($result);
         return $result;
 
     } catch (Exception $e) {
@@ -87,20 +87,20 @@ var_dump($sql);
 public function findByFieldSearch(string $field, $value,$table) {
       echo $field, $value,$table;
         $sql = "SELECT * FROM $table WHERE $field $value";
-    var_dump($sql);
+    // var_dump($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute();
-            var_dump($stmt);
+            // var_dump($stmt);
             if ($table !== 'cours') {
                 $class = ucfirst(substr($table, 0, -1));            
-                var_dump($class);
+                // var_dump($class);
             }else{
                 $class = ucfirst($table);            
     
             }
             $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
-            var_dump($result[0]);
+            // var_dump($result[0]);
             return $result;
     
         } catch (Exception $e) {

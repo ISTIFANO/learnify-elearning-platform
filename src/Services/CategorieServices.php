@@ -42,6 +42,7 @@ class CategorieServices {
   
     public function findCategorieById($id) {
         $categorie = $this->repository->findOne($this->categorie, $id);
+        // var_dump($categorie);
         return $categorie;
     }
 

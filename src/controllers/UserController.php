@@ -46,7 +46,7 @@ class UserController{
  $userr = new UserController ;
 // //  $userr->getbyName() ;
  $userr->getAllUsers();
- var_dump($userr);
+//  var_dump($userr);
 //  $varArr =$userr->getAllUsers();
 
 // var_dump($use);

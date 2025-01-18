@@ -51,7 +51,7 @@ $this->categorie= new Categorie;
 
     public function columns(): array {
         return [
-            "title" => $this->titre,
+            "titre" => $this->titre,
             "description" => $this->description,
             "content" => $this->contenue,
             "user_id" => $this->teacher->getId(),

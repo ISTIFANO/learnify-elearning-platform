@@ -1,5 +1,6 @@
 <?php 
 require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+#[\AllowDynamicProperties]
 
 class Role extends DaoGenerator {
     private int $id;
@@ -52,9 +53,9 @@ class Role extends DaoGenerator {
         return $this->role_description;
     }
 
-    public function __toString() {
-        return "(Role) => id: " . $this->id . ", name: " . $this->role_name . ", description: " . $this->role_description;
-    }
+    // public function __toString() {
+    //     return "(Role) => id: " . $this->id . ", name: " . $this->role_name . ", description: " . $this->role_description;
+    // }
 }
 
 ?>

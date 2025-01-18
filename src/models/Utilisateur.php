@@ -17,7 +17,7 @@ class Utilisateur extends DaoGenerator {
     private int $role_id;
 
     public function __construct() {
-        // $this->role=new Role;à
+    $this->role=new Role;
     }
     public function __call($name, $arguments) {
         if($name == "BuilderUser"){

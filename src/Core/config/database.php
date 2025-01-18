@@ -48,9 +48,9 @@ class Database{
 
 $db =Database::getInstance()->getConnection();
 
-if($db){
-    echo"<h1>database has been connected</h1>";
-}
+// if($db){
+//     echo"<h1>database has been connected</h1>";
+// }
 
 
 

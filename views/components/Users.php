@@ -15,7 +15,7 @@ require_once '../../src/controllers/UserController.php';
 $userr = new UserController ;
 $showall =$userr->getAllUsers();
 
- var_dump($showall);
+//  var_dump($showall);
  
  ?>
 <body >
@@ -28,7 +28,7 @@ $showall =$userr->getAllUsers();
                         <a href="#" class="btn">View All</a>
                     </div>
 
-                    <table>
+                    <table  >
                         <thead>
                             <tr>
                                 <td>Name</td>
@@ -37,20 +37,24 @@ $showall =$userr->getAllUsers();
                                 <td>Price</td>
                                 <td>Payment</td>
                                 <td>Status</td>
+                                <td>Telephone</td>
+
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <?php foreach ($varArr as $key) {
+                                <?php foreach ($showall as $key) {
                                    
                                echo '   <td width="60px">
-                                <div class="imgBx"><img src= .'.$key->getPhoto().'. alt=""></div>
+                                <div class="imgBx"><img src=.'.$key->getPhoto().'. alt=""></div>
                             </td>';
                               echo'  <td> .'.$key->getFirstname().'.</td>
                                 <td>.'.$key->getLastname().'.</td>
                                 <td>.'.$key->getEmail().'.</td>
-                                <td><span class="status delivered"> .'.$key->getRole()->getRoleName().'.</span></td>
+                                <td><span class="status delivered"> .'.$key->getIsValide().'.</span></td>
+                                                                <td>.'.$key->getPhone().'.</td>
+
                             </tr>';
                         } ?>
                            
@@ -63,5 +67,9 @@ $showall =$userr->getAllUsers();
             <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+    
+    </div>
 </body>
 </html>

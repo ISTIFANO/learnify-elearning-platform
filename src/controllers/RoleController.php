@@ -19,7 +19,7 @@ class RoleController{
         $this->roleservices = new RoleServices();
     }
 
-    public function getAllUsers(){
+    public function findAll(){
         try {
                       return   $this->roleservices->findAll();
          }
@@ -65,10 +65,6 @@ class RoleController{
 }
 
 
-$role = new RoleController;
 
-$resultat =$role->FindById();
-
-var_dump($resultat);
 
 ?>

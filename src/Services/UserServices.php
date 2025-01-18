@@ -42,16 +42,16 @@ return $userDeleted ;
     public function findAll()
     {
 
-        echo "#####################################################";
+        // echo "#####################################################";
 
         $user = $this->reposetery->findAll("utilisateurs");
-        var_dump($user);
+        // var_dump($user);
         foreach ($user  as $users) {
             $idrole = $this->roleServices->findRoleByid($users->getRoleId());
  $users->setRoleId($idrole)  ;
 //  var_dump($test);
      }
-     var_dump($users);
+    //  var_dump($users);
      return $user;
     }
     public function findbyId($id)

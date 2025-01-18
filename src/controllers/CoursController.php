@@ -48,38 +48,54 @@ class CoursController {
     public function createCourse($data) {
         try {
             if (!isset($data['titre']) || empty($data['titre'])) {
+
+
                 return ['error' => 'Course title is required'];
             }
             if (!isset($data['categorie_id']) || !isset($data['teacher_id'])) {
                 return ['error' => 'Category and teacher are required'];
             }
-
+// echo '<h1>'.$data['id'].'</h1>';
             $categorie = $this->categorieServices->findCategorieById($data['categorie_id']);
             $teacher = $this->userServices->findById($data['teacher_id']);
 
             if (!$categorie || !$teacher) {
-                return ['error' => 'Invalid category or teacher'];
+                return ['error' => 'error bcs invalid'];
             }
 
             $cours = new Cours();
             $cours->CoursBuilder(
+                $data['id'],
                 $data['titre'],
                 $data['description'] ?? ''
             );
-            $cours->setCategorie($categorie);
-            $cours->setTeacher($teacher);
+// var_dump( $cours);
+// var_dump($categorie);
+           $cours->setCategorie($categorie);
+
+
+       $cours->setTeacher($teacher);
             $cours->setContenue($data['contenue'] ?? '');
-            $cours->setPhoto($data['photo'] ?? '');
+// echo '<h1>'.$data['contenue'].'</h1>';
 
-            $result = $this->coursServices->create($cours);
-            
-            if (isset($data['tags']) && is_array($data['tags'])) {
-                foreach ($data['tags'] as $tagId) {
-                    $this->coursServices->addTagToCourse($result->getId(), $tagId);
-                }
+   $cours->setPhoto($data['photo'] ?? '');
+
+//    var_dump($cours);
+            $courses  = $this->coursServices->create($cours);
+            echo gettype($courses);
+            echo $courses->getId();
+            // echo "ASCASCASCASCCCCCCASCCCCCCCCCCCCCCCCCCCCCCCCCCC";
+            // var_dump($result);
+           
+                // var_dump($cour);
+            // echo $cour->getId() ;
+            foreach ($data['tags'] as $tagId) {
+                // echo "####################################";
+                
+                $this->coursServices->addTagToCourse($courses->getId(), $tagId);
             }
-
-            return $result;
+        
+      
         } catch(Exception $e) {
             return ['error' => $e->getMessage()];
         }
@@ -137,7 +153,7 @@ class CoursController {
 
             return $result ? 
                  ['succ' => 'succ'] : 
-               var_dump( ['error' => 'error']);
+               ( ['error' => 'error']);
 
         } catch(Exception $e) {
             return var_dump( ['error' => $e->getMessage()]);
@@ -190,25 +206,27 @@ class CoursController {
   
        
    $user= $this->coursServices->findAll();
-    var_dump( $user);
+    // var_dump( $user);
 
     }
 } 
 
-
 $coursController = new CoursController();
 
-// Créer un nouveau cours
 // $newCourse = $coursController->createCourse([
+//     'id'=>22,
 //     'titre' => 'PHP Avancé',
 //     'description' => 'Formation PHP avancée',
-//     'categorie_id' => 1,
+//     'contenue' => 'Formation PHP avancée',
+//     'photo' => 'png.JPEJ',
+//     'categorie_id' => 2,
 //     'teacher_id' => 5,
 //     'tags' => [1, 2, 3]
-// ]);     
+// ]);         
 
-   $coursController->read();
+$coursController->AddStudentCours(107,3);
 
+//    $coursController->read();
 // // Rechercher des cours
 // $courses = $coursController->searchCourses('Python Programming');
 

@@ -28,9 +28,17 @@ private RoleServices $roleServices;
 
   
     public function create($cours) {
+        // var_dump($cours);
         if (!empty($cours->getTitre())) {
-            $createdCours = $cours->setId($this->repository->create($cours));
-            return $createdCours;
+            // echo "##############################3";
+            // var_dump($this->repository->create($cours));
+          
+            $cours->setId($this->repository->create($cours));
+            
+            // var_dump($cours);
+
+            // echo "dfghjkl";
+            return $cours;
         }
         return false;
     }
@@ -38,8 +46,8 @@ private RoleServices $roleServices;
     public function getByFields($field, $value) {
         $courses = $this->repository->findByField($field, $value, "cours");
 
-        var_dump($courses);
-        return $this->surchargeCours($courses);
+        // var_dump($courses);
+        return $courses;
     }
     public function findByFieldSearch($field, $value) {
         $courses = $this->repository->findByFieldSearch($field, $value, "cours");
@@ -48,7 +56,7 @@ private RoleServices $roleServices;
     }
     
     public function deleteCours($id) {
-        return $this->repository->delete("cours", $id);
+        return $this->repository->delete( $this->cours, $id);
     }
 
     public function findAll() {
@@ -112,18 +120,16 @@ private RoleServices $roleServices;
  
     public function addStudentToCourse($coursId, $studentId) {
 
-       echo $coursId;
-       echo $studentId;
-        $sql = "INSERT INTO inscription (etudiant_id,cours_id) VALUES ($coursId,$studentId)";
-        var_dump($sql);
+    
+        $sql = "INSERT INTO `inscription` (`etudiant_id`, `cours_id`, `date_inscription`) VALUES ($studentId,$coursId, CURRENT_TIMESTAMP);";
+         var_dump($sql);
         try {
       
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
       
-var_dump( $stmt);
+ var_dump( $stmt);
             $resultat = $stmt->execute();
-            echo '<script>aleart("succ")</script>';
-            var_dump($resultat);
+            // var_dump($resultat);
 
             return   $resultat;
         } catch (Exception $e) {
@@ -143,10 +149,10 @@ var_dump( $stmt);
     }
 
     public function addTagToCourse($coursId, $tagId) {
-        $sql = "INSERT INTO cours_tags (cours_id, tag_id) VALUES (?, ?)";
+        $sql = "INSERT INTO cours_tags (cours_id, tag_id) VALUES (? , ?)";
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
-            return $stmt->execute([$coursId, $tagId]);
+            $stmt->execute([$coursId, $tagId]);
         } catch (Exception $e) {
             return false;
         }
