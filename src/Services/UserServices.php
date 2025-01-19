@@ -39,6 +39,12 @@ $userDeleted =$this->reposetery->delete($this->Utilisateur,$id);
 
 return $userDeleted ;
 }
+public function findbyEmailAndPassword($email,$password){
+    
+    $findbyEmailAndPassword =$this->reposetery->findbyEmailAndPassword($email,$password,$this->Utilisateur);
+    
+    return $findbyEmailAndPassword ;
+    }
     public function findAll()
     {
 

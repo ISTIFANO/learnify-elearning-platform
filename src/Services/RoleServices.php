@@ -33,6 +33,11 @@ return $CreateRoleuser;
         $Roleuser = $this->reposetery->findByField($fields,$value, "roles");
         return $Roleuser;
     }
+    public function findRoleByname($name)
+    {
+        $Roleuser = $this->reposetery->findrolebyName($name, "roles");
+        return $Roleuser;
+    }
 public function DeleteRoleusers($id){
     
 $RoleuserDeleted =$this->reposetery->delete("roles",$id);

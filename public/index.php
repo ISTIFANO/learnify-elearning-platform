@@ -7,7 +7,6 @@
 $route = $_SERVER['REQUEST_URI'];
 
 
-// echo $route;
 // $page = $_GET['action'];
 
 switch ($route) {
@@ -19,7 +18,7 @@ break;
 case '/login':
 include '../views/pages/LogIn.php';
 break;
-case '/SignUp':
+case '/signUp':
     include '../views/pages/SignUp.php';
     break;
 case 'Tags':

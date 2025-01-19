@@ -61,6 +61,29 @@ return $result;
         return [];
     }
 }
+public function findrolebyName($value,$table) {
+    //    echo $field, $value,$table;
+        $sql = "SELECT * FROM $table WHERE role_name ='".$value."'";
+    // var_dump($sql);
+        try {
+            $stmt = Database::getInstance()->getConnection()->prepare($sql);
+            $stmt->execute();
+            // var_dump($stmt);
+            if ($table !== 'cours') {
+                $class = ucfirst(substr($table, 0, -1));            
+                // var_dump($class);
+            }else{
+                $class = ucfirst($table);            
+    
+            }
+            $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
+            // var_dump($result);
+            return $result;
+    
+        } catch (Exception $e) {
+            return [];
+        }
+    }
 public function findByField(string $field, $value,$table) {
 //    echo $field, $value,$table;
     $sql = "SELECT * FROM $table WHERE $field ='".$value."'";
@@ -84,6 +107,16 @@ public function findByField(string $field, $value,$table) {
         return [];
     }
 }
+public function findbyEmailAndPassword($email ,$password) {
+    $sql = "SELECT *  FROM utilisateurs WHERE email  = '" .$email  ."' AND password =  '" .$password ."';" ;
+   
+    $stmt =  Database::getInstance()->getConnection()->prepare($sql);
+   
+     $stmt->execute();
+
+       return $stmt->fetchObject(Utilisateur::class);
+     
+  }
 public function findByFieldSearch(string $field, $value,$table) {
       echo $field, $value,$table;
         $sql = "SELECT * FROM $table WHERE $field $value";
