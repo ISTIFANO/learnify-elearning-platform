@@ -1,4 +1,5 @@
 <?php 
+require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
 
 
 

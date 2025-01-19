@@ -38,6 +38,10 @@ $showall =$userr->getAllUsers();
                                 <td>Payment</td>
                                 <td>Status</td>
                                 <td>Telephone</td>
+                                <td>Opperation
+                                     </td>
+
+
 
                             </tr>
                         </thead>
@@ -45,7 +49,7 @@ $showall =$userr->getAllUsers();
                         <tbody>
                             <tr>
                                 <?php foreach ($showall as $key) {
-                                   
+                                //   var_dump( $key);
                                echo '   <td width="60px">
                                 <div class="imgBx"><img src=.'.$key->getPhoto().'. alt=""></div>
                             </td>';
@@ -54,8 +58,16 @@ $showall =$userr->getAllUsers();
                                 <td>.'.$key->getEmail().'.</td>
                                 <td><span class="status delivered"> .'.$key->getIsValide().'.</span></td>
                                                                 <td>.'.$key->getPhone().'.</td>
+                                                                <td> <a href="../dashboard.php?updated="' .$key->getId(). '">
+editer               
+              </button>
+              </a> <a href="../dashboard.php?deleted="'.$key->getId().'">
+              supprimer
+              </button>
+              </a></td>
 
-                            </tr>';
+                            </tr>
+                            ';
                         } ?>
                            
                             </tr>
