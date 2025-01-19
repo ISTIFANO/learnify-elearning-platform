@@ -4,6 +4,7 @@
 require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
 require_once PROJECT_ROOT . '\models\Cours.php';
 require_once PROJECT_ROOT . '\Services\CategorieServices.php';
+// echo PROJECT_ROOT . '\Services\UserServices.php';
 require_once PROJECT_ROOT . '\Services\UserServices.php';
 require_once PROJECT_ROOT . '\Services\TagServices.php';
 require_once PROJECT_ROOT . '\Services\RoleServices.php';
@@ -61,24 +62,27 @@ private RoleServices $roleServices;
 
     public function findAll() {
         $courses = $this->repository->findAll("cours");
+        // var_dump($courses );
         foreach($courses as $cour){
-            // ($cour->categorie_id);
-            // echo $cour->categorie_id ;
+        //  echo ($cour->categorie_id);
+          echo $cour->categorie_id ;
                $category =  $this->categorieServices->findCategorieById($cour->categorie_id);
-            //    var_dump();
+      
                $categorie1 = new Categorie ; 
-               $categorie1->CategorieBuilder($category['id'], $category['name'] , $category['description']);
-              var_dump($cour->user_id);
+              
+               $categorie1->CategorieBuilder($category->getId(), $category->getName() , $category->getDescription());
+               var_dump($category->getName());
                $user =   $this->userServices->findbyId($cour->user_id);
-               
-
+// var_dump($user);
                         //    $user =   $this->userServices->findbyId($cour->user_id);
 
                   $user1 = new Utilisateur ;
                 // //   var_dump( $user );
-                  $user1->BuilderUser($user['id'],$user['firstname'],$user['lastname'],$user['email'],$user['password'],$user['phone'],$user['photo'],$user['is_active']) ;
+                  $user1->BuilderUser($user->getId(),$user->getFirstname(),$user->getLastname(),$user->getEmail(),$user->getPassword(),$user->getPhone(),$user->getPhoto(),$user->getIsValide()) ;
                   $cour->setTeacher($user1);
                   $cour->setCategorie($categorie1);
+                  
+                //   var_dump($cour);
                  return $cour ; 
                 //   $CoursHasIduser = $this->findCoursById($user['id']);
                 //   var_dump( $CoursHasIduser);   

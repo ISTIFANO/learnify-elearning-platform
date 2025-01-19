@@ -206,7 +206,7 @@ class CoursController {
   
        
    $user= $this->coursServices->findAll();
-    // var_dump( $user);
+    //  var_dump( $user);
 
     }
 } 
@@ -224,9 +224,9 @@ $coursController = new CoursController();
 //     'tags' => [1, 2, 3]
 // ]);         
 
-$coursController->AddStudentCours(107,3);
+// $coursController->AddStudentCours(107,3);
 
-//    $coursController->read();
+   $coursController->read();
 // // Rechercher des cours
 // $courses = $coursController->searchCourses('Python Programming');
 

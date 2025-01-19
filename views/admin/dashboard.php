@@ -46,6 +46,7 @@ case 'Reservation':
     break;
     case 'Utilisateurs':
         include '../components/UtilisateursProfiles.php';
+
         break;
 case 'Logout':
 echo "<div class='content'>

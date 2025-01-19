@@ -89,7 +89,7 @@ abstract class DaoGenerator
         $table = $this->tablename();
         $sql = "SELECT * FROM $table WHERE id = ?";
 
-        echo   $sql;
+        // echo   $sql;
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute();
