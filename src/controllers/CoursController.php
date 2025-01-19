@@ -1,11 +1,11 @@
 <?php 
- define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
+//   define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
 
-require_once PROJECT_ROOT . '\models\Cours.php';
-require_once PROJECT_ROOT . '\Services\CoursServices.php';
-require_once PROJECT_ROOT . '\Services\UserServices.php';
-require_once PROJECT_ROOT . '\Services\CategorieServices.php';
-require_once PROJECT_ROOT . '\Services\TagServices.php';
+require_once PROJECT_ROOT . '\src\models\Cours.php';
+require_once PROJECT_ROOT . '\src\Services\CoursServices.php';
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+require_once PROJECT_ROOT . '\src\Services\CategorieServices.php';
+require_once PROJECT_ROOT . '\src\Services\TagServices.php';
 
 class CoursController {
     private CoursServices $coursServices;
@@ -226,7 +226,7 @@ $coursController = new CoursController();
 
 // $coursController->AddStudentCours(107,3);
 
-   $coursController->read();
+    $coursController->read();
 // // Rechercher des cours
 // $courses = $coursController->searchCourses('Python Programming');
 

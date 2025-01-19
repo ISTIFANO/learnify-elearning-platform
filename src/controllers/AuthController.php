@@ -1,86 +1,56 @@
 <?php
+//    define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
+echo PROJECT_ROOT;
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+require_once PROJECT_ROOT . '\src\Services\AuthService.php';
+require_once PROJECT_ROOT . '\src\models\Utilisateur.php';
+require_once PROJECT_ROOT . '\src\models\Role.php';
 
-require_once PROJECT_ROOT . '\Services\AuthService.php';
+// require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
+// C:\wamp64\www\learnify-elearning-platform\src\models\Utilisateur.php
 
-class AuthController {
-    private AuthService $authService;
 
+ class AuthController {
+    private AuthService $authservice ;
+    private UserServices $userServices;
     public function __construct() {
-        $this->authService = new AuthService();
-    }
-    public function login($data) {
-        try {
-            if (!isset($data['email']) || !isset($data['password'])) {
-                return ['error' => 'Email and password are required'];
-            }
+        $this->authservice = new AuthService() ; 
 
-            $result = $this->authService->login($data['email'], $data['password']);
-            
-            if (isset($result['success'])) {
-                session_start();
-                $_SESSION['user'] = $result['user']; 
-            }
-
-            return $result;
-        } catch (Exception $e) {
-            return ['error' => 'Login failed: ' . $e->getMessage()];
-        }
-    }
-
-    public function register($data) {
-        try {
-            $required = ['email', 'password', 'firstname', 'lastname'];
-            foreach ($required as $field) {
-                if (!isset($data[$field]) || empty($data[$field])) {
-                    return ['error' => "Field '$field' is required"];
-                }
-            }
-
-            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                return ['error' => 'Invalid email format'];
-            }
-
-            if (strlen($data['password']) < 8) {
-                return ['error' => 'Password must be at least 8 characters long'];
-            }
-
-            return $this->authService->register($data);
-        } catch (Exception $e) {
-            return ['error' => 'Registration failed: ' . $e->getMessage()];
-        }
-    }
-
-    public function logout() {
-        try {
-            session_start();
-            session_destroy(); 
-            return ['success' => true, 'message' => 'Logged out successfully'];
-        } catch (Exception $e) {
-            return ['error' => 'Logout failed'];
-        }
-    }
-
-
-    public function activateAccount($token) {
-        try {
-            return $this->authService->activateAccount($token);
-        } catch (Exception $e) {
-            return ['error' => 'Account activation failed: ' . $e->getMessage()];
-        }
-    }
-
+        
+    } 
    
+    public function createUser(){
+      $id=8;
+        $lastname = "Aamir"; 
+        $firstname = "Aamir"; 
+$phone=234567890;
+        $email = "aamir@mferble.com";
+        $password = "4567890";
+        $rolename = "STUDENT";
+        $status = "active" ;
+        if($rolename=="STUDENT"){
+           $status = "Pending";
+        }
+        $photo = "asc.png";
+        $role = new Role ; 
+        $role->RoleBuilder($rolename);
+        $user = new Utilisateur;
+        $user->BuilderUser($id,$firstname , $lastname , $email , $password ,$phone,$photo ,$status , $role );
 
- 
 
-    public function isAuthenticated() {
-        session_start();
-        return isset($_SESSION['user']);
     }
+    public function Login($email , $password ){
+      try {
+            $this->authservice->loginValidation($email , $password) ;
 
- 
-    public function getCurrentUser() {
-        session_start();
-        return $_SESSION['user'] ?? null;
+            // header("Location: /Categories");
+      }
+      catch(Exception $e){
+         return $e->getMessage();
+      }
     }
-}
+ }
+
+ $AuthController = new AuthController();
+$AuthController->Login("bob.martin@example.com","password456");
+?>

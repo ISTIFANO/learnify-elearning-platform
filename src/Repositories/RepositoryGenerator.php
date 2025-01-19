@@ -1,6 +1,6 @@
 <?php 
-require_once PROJECT_ROOT.'\Core\config\database.php';
-require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+require_once PROJECT_ROOT.'\src\Core\config\database.php';
+require_once PROJECT_ROOT.'\src\DAOs\DaoGenerator.php';
 // echo PROJECT_ROOT.'\views\components\GeneratorTableaux.php'; echo '</br>';
 // require_once PROJECT_ROOT.'\views\components\GeneratorTableaux.php';
 
@@ -31,9 +31,14 @@ public function update($table,$id){
 }
 public function findOne($table,$id){
      
-   
+//    var_dump($table,$id);
     return $table->FindById($id);
 }
+public function read($table){
+     
+    //   var_dump($table);
+        return $table->read();
+    }
 
 public function findAll($table) {
 

@@ -1,8 +1,8 @@
 <?php 
 // define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
 
-require_once PROJECT_ROOT . '\models\Categorie.php';
-require_once PROJECT_ROOT . '\Services\CategorieServices.php';
+require_once PROJECT_ROOT . '\src\models\Categorie.php';
+require_once PROJECT_ROOT . '\src\Services\CategorieServices.php';
 
 class CategorieController {
     private CategorieServices $categorieServices;

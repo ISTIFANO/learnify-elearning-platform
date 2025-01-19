@@ -1,7 +1,10 @@
 <?php
 
 
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Repositories\Implementations\TagCoursReopsitory.php';
+require_once PROJECT_ROOT . '\src\models\Tag.php';
+
 
 
 
@@ -10,10 +13,14 @@ class TagServices
 
     private Tag $tags;
     private RepositoryGenerator $reposetery;
+    private TagCoursReopsitory $repoTagsCours;
 
     public function __construct()
     {
+        $this->tags = new Tag();
         $this->reposetery = new RepositoryGenerator;
+        $this->repoTagsCours = new TagCoursReopsitory();
+
     }
 
     public function create($tag){
@@ -28,8 +35,8 @@ return $tagscreated;
     }
     public function getbyfields($fields,$value)
     {
-        $Roleuser = $this->reposetery->findByField($fields,$value, "tags");
-        return $Roleuser;
+        $tags = $this->reposetery->findByField($fields,$value, "tags");
+        return $tags;
     }
 public function DeleteTag($id){
     
@@ -45,10 +52,10 @@ return $tagsDeleted ;
         return $tags;
       
     }
-    public function findRoleByid($id)
+    public function findByid($id)
     {
-
-        $tagsId = $this->reposetery->findOne($this->tags,$id);
+$idTag =(int)$id;
+        $tagsId = $this->reposetery->findOne($this->tags,$idTag);
 // var_dump( $tagsId);
         return $tagsId;
     }

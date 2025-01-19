@@ -1,4 +1,4 @@
-<?php require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+<?php require_once PROJECT_ROOT.'\src\DAOs\DaoGenerator.php';
 
 class Tag extends DaoGenerator {
     private int $id;

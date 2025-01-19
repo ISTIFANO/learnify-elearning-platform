@@ -1,5 +1,5 @@
 <?php
-require_once PROJECT_ROOT . '\Core\config\database.php';
+//  define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
 
 
 abstract class DaoGenerator
@@ -37,13 +37,13 @@ abstract class DaoGenerator
         $values = array_values($columns);
 
         $sql = "INSERT INTO $table ($columnNames) VALUES ($placeholders)";
-        var_dump($sql);
-        var_dump($values);
+        // var_dump($sql);
+        // var_dump($values);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             var_dump($stmt);
             $stmt->execute($values);
-            echo "############################";
+            // echo "############################";
 
             $id =Database::getInstance()
                 ->getConnection()
@@ -60,6 +60,7 @@ abstract class DaoGenerator
 
     public function FindById(int $id)
     {
+        // var_dump($id);
         $table = $this->tablename();
         $sql = "SELECT * FROM $table WHERE id = ?";
         // var_dump($sql);
@@ -73,11 +74,10 @@ abstract class DaoGenerator
             // }else{
             //     $class = ucfirst($table);            
 
-            // }
-            // $result= $stmt->fetchAll(PDO::FETCH_ASSOC);
+         
 
             $result = $stmt->fetchObject($this->ClassesChecker());
-            // var_dump($result);
+        //   var_dump($result);
             return $result;
         } catch (Exception $e) {
             return null;
@@ -87,9 +87,9 @@ abstract class DaoGenerator
     public function read()
     {
         $table = $this->tablename();
-        $sql = "SELECT * FROM $table WHERE id = ?";
+        $sql = "SELECT * FROM $table";
 
-        // echo   $sql;
+    //    echo   $sql;
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute();
