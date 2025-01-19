@@ -4,78 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../public/css/style.css">
+    <!-- Add Tailwind CSS via CDN for convenience -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="logo-apple"></ion-icon>
-                        </span>
-                        <span class="title">Brand Name</span>
-                    </a>
-                </li>
+<body class="font-ubuntu bg-gray-100">
 
-                <li>
-                    <a href="../admin/dashboard.php?action=Dashboard">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
+    <!-- Navigation Sidebar -->
+    <div class="navigation fixed top-0 left-0 h-full bg-blue-900 text-white w-72 p-6 transition-all duration-300 ease-in-out">
+        <ul>
+            <!-- Brand Name -->
+            <li class="mb-10">
+                <a href="#" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="logo-apple"></ion-icon>
+                    </span>
+                    <span class="title text-xl">Brand Name</span>
+                </a>
+            </li>
 
-                <li>
-                    <a href="../admin/dashboard.php?action=users">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Utilisateurs</span>
-                    </a>
-                </li>
+         
 
-                <li>
-                    <a href="../admin/dashboard.php?action=Tags">
-                        <span class="icon">
-                            <ion-icon name="chatbubble-outline"></ion-icon>
-                        </span>
-                        <span class="title">Tags</span>
-                    </a>
-                </li>
+            <!-- Users -->
+            <li class="mb-4">
+                <a href="/Statistic" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="people-outline"></ion-icon>
+                    </span>
+                    <span class="title text-lg">statistics</span>
+                </a>
+            </li>
 
-                <li>
-                    <a href="../admin/dashboard.php?action=Categories">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">Categories</span>
-                    </a>
-                </li>
+            <!-- Tags -->
+            <li class="mb-4">
+                <a href="/Tags" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="chatbubble-outline"></ion-icon>
+                    </span>
+                    <span class="title text-lg">Tags</span>
+                </a>
+            </li>
 
-                <li>
-                    <a href="../admin/dashboard.php?action=Utilisateurs">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Utilisateurs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../admin/dashboard.php?action=Logout">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Logout</span>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-        <script src="../../public/js/main.js"></script>
-            <!-- ====== ionicons ======= -->
+            <!-- Categories -->
+            <li class="mb-4">
+                <a href="/Categories" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="help-outline"></ion-icon>
+                    </span>
+                    <span class="title text-lg">Categories</span>
+                </a>
+            </li>
+
+            <!-- Settings -->
+            <li class="mb-4">
+                <a href="/Utilisateurs" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </span>
+                    <span class="title text-lg">Utilisateurs</span>
+                </a>
+            </li>
+
+            <!-- Logout -->
+            <li>
+                <a href="/Logout" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+                    <span class="icon text-2xl">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </span>
+                    <span class="title text-lg">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../public/js/main.js"></script>
+
+    <!-- ====== Ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>

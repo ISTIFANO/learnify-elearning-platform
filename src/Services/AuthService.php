@@ -1,9 +1,9 @@
 <?php
 
-require_once PROJECT_ROOT . '\Services\UserServices.php';
-require_once PROJECT_ROOT . '\Services\RoleServices.php';
-require_once PROJECT_ROOT . '\Core\Utils\Regex.php';
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+require_once PROJECT_ROOT . '\src\Services\RoleServices.php';
+require_once PROJECT_ROOT . '\src\Core\Utils\Regex.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
 class AuthService extends Regex {
     private UserServices $userServices;
     private RoleServices $roleServices;
@@ -24,8 +24,9 @@ class AuthService extends Regex {
         if($this->ValidationEmail($email)){
             $user = $this->userServices->findbyEmailAndPassword($email,$password);
             if(isset($user)){
-            // var_dump($user);
-               $user->SetRole($this->roleServices->findRoleByid($user->getId()));
+     var_dump($user);
+     var_dump(  $this->roleServices->findRoleByid($user->getId()));
+               $user->SetRole($this->roleServices->findRoleByid($user->getRoleId()));
                var_dump($user->getRole());
                return $user ;
             }

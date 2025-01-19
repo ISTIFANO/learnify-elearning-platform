@@ -1,7 +1,7 @@
 <?php
 
 
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
 
 
 
@@ -54,6 +54,7 @@ return $RoleuserDeleted ;
     }
     public function findRoleByid($id)
     {
+        // var_dump($id);
 
         $Roleuser = $this->reposetery->findOne($this->role,$id);
 // var_dump( $Roleuser);

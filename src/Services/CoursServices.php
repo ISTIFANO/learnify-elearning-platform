@@ -1,21 +1,27 @@
 <?php
 //  define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
 
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-require_once PROJECT_ROOT . '\models\Cours.php';
-require_once PROJECT_ROOT . '\Services\CategorieServices.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Repositories\Implementations\TagCoursReopsitory.php';
+
+require_once PROJECT_ROOT . '\src\models\Cours.php';
+require_once PROJECT_ROOT . '\src\DAOs\TagCourDao.php';
+require_once PROJECT_ROOT . '\src\Services\CategorieServices.php';
 // echo PROJECT_ROOT . '\Services\UserServices.php';
-require_once PROJECT_ROOT . '\Services\UserServices.php';
-require_once PROJECT_ROOT . '\Services\TagServices.php';
-require_once PROJECT_ROOT . '\Services\RoleServices.php';
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+require_once PROJECT_ROOT . '\src\Services\TagServices.php';
+require_once PROJECT_ROOT . '\src\Services\RoleServices.php';
+// require_once PROJECT_ROOT . '\src\Services\TagServices.php';
+
 
 
 class CoursServices {
     private Cours $cours;
     private RepositoryGenerator $repository;
+    private TagCoursReopsitory $repoTagsCours;
     private CategorieServices $categorieServices;
     private UserServices $userServices;
-    //  private TagServices $tagServices;
+      private TagServices $tagServices;
 private RoleServices $roleServices;
     public function __construct() {
         $this->cours = new Cours();
@@ -23,8 +29,8 @@ private RoleServices $roleServices;
         $this->categorieServices = new CategorieServices();
         $this->userServices = new UserServices();
         $this->roleServices = new roleServices();
-
-        // $this->tagServices = new TagServices();
+        $this->repoTagsCours = new TagCoursReopsitory();
+ $this->tagServices = new TagServices();
     }
 
   
@@ -60,41 +66,30 @@ private RoleServices $roleServices;
         return $this->repository->delete( $this->cours, $id);
     }
 
-    public function findAll() {
-        $courses = $this->repository->findAll("cours");
-        // var_dump($courses );
+    public function findAll(){
+        
+        // var_dump($this->generalrepository->getAll($this->cour));
+        $courses  =  $this->repository->read($this->cours);
+        // var_dump( $courses);
+        $arrayOfCours = []; 
         foreach($courses as $cour){
-        //  echo ($cour->categorie_id);
-          echo $cour->categorie_id ;
-               $category =  $this->categorieServices->findCategorieById($cour->categorie_id);
-      
-               $categorie1 = new Categorie ; 
-              
-               $categorie1->CategorieBuilder($category->getId(), $category->getName() , $category->getDescription());
-               var_dump($category->getName());
-               $user =   $this->userServices->findbyId($cour->user_id);
-// var_dump($user);
-                        //    $user =   $this->userServices->findbyId($cour->user_id);
-
-                  $user1 = new Utilisateur ;
-                // //   var_dump( $user );
-                  $user1->BuilderUser($user->getId(),$user->getFirstname(),$user->getLastname(),$user->getEmail(),$user->getPassword(),$user->getPhone(),$user->getPhoto(),$user->getIsValide()) ;
-                  $cour->setTeacher($user1);
-                  $cour->setCategorie($categorie1);
-                  
-                //   var_dump($cour);
-                 return $cour ; 
-                //   $CoursHasIduser = $this->findCoursById($user['id']);
-                //   var_dump( $CoursHasIduser);   
-        }
-        // return $courses;
-        // $categorie = new Categorie ; 
-        // $categorie->CategorieBuilder();
-    
-        // echo "####################";
-        // var_dump($courses);
-        // return $this->surchargeCours($courses);
+            $categorie = new Categorie ;
+            $categorieservice= new CategorieServices ;
+            $userservice = new UserServices ;
+            // echo $cour->getId();
+            $cour->setTeacher($userservice->findById($cour->getUserId()));
+            $cour->setCategorie($categorieservice->findCategorieById($cour->getCategorieId()));
+           $tags =  $this->repoTagsCours->foundById($cour->getId());
+        //    die(  $tags );
+           $arrayoftags = []; 
+           foreach($tags as $tag ){
+           $arrayoftags[] = $this->tagServices->findByid($tag->tag_id);
+           }
+           $cour->setTags($arrayoftags);
+           $arrayOfCours[] =  $cour ;
     }
+    return $arrayOfCours ; 
+}
     public function findCoursByid($id)
     {
 

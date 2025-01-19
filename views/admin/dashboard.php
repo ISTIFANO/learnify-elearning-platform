@@ -14,52 +14,9 @@
     <div class="container">
      
             <?php 
-            include("../components/SideBar.php");
+            include("../views/components/SideBar.php");
             ?>
-               <div class="main">
-         <?php
-            // include("../components/search-bar.php");
-
-
-            // include("../components/Reservation.php");    ?>
-     
-
-    <?php 
-    
-$page = $_GET['action'];
-
-switch ($page) {
-case 'Categories':
-include '../components/UtilisateursProfiles.php';
-break;
-case 'Roles':
-include '../components/UtilisateursProfiles.php';
-break;
-case 'Tags':
-    include '../components/UtilisateursProfiles.php';
-    break;
-case 'users':
-include '../components/Users.php';
-break;
-case 'Reservation':
-    include '../components/UtilisateursProfiles.php';
-    break;
-    case 'Utilisateurs':
-        include '../components/UtilisateursProfiles.php';
-
-        break;
-case 'Logout':
-echo "<div class='content'>
-    <h2>Déconnexion</h2>
-    <p>Vous avez été déconnecté.</p>
-</div>";
-break;
-case 'dashboard':
-default:
-break;
-}
-?>
-   </div>
+              
    </div>
     <script src="../../public/js/main.js"></script>
 

@@ -1,10 +1,10 @@
 <?php 
- define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
+//  define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
 
-require_once PROJECT_ROOT.'\models\Utilisateur.php';
- echo PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-require_once PROJECT_ROOT . '\Services\UserServices.php';
+require_once PROJECT_ROOT.'\src\models\Utilisateur.php';
+ echo PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
 
 
  

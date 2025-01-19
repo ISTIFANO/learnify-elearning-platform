@@ -1,8 +1,8 @@
 <?php
 
 
-require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-require_once PROJECT_ROOT . '\Services\RoleServices.php';
+require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+require_once PROJECT_ROOT . '\src\Services\RoleServices.php';
 
 
 
@@ -66,7 +66,7 @@ public function findbyEmailAndPassword($email,$password){
     {
         $user = $this->reposetery->findOne($this->Utilisateur,$id);
 
-// var_dump(  $user);
+var_dump(  $user);
         return $user;
     }
     public function countusers($table){

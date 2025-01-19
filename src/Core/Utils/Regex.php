@@ -22,8 +22,10 @@ class Regex{
     }
     public function ValidationEmail($Email){
 
-    $pregMuchExpretion="/^[a-zA-Z0-9]+@[a-zA-Z0-9\-]+[a-z]{2,3})/";
+    $pregMuchExpretion="/^[a-zA-Z0-9]/";
         if(preg_match($pregMuchExpretion,$Email)){
+
+            
             return true;
         }
         return false;

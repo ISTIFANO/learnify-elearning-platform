@@ -1,5 +1,5 @@
 <?php 
-require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+require_once PROJECT_ROOT.'\src\DAOs\DaoGenerator.php';
 require_once 'Categorie.php';
 require_once 'Utilisateur.php';
  #[\AllowDynamicProperties]
@@ -14,9 +14,16 @@ class Cours extends DaoGenerator {
     private Utilisateur $teacher;
     private array $tags = [];
     private string $photo;
+    private int $categorie_id ; 
+    
+    private int $user_id;
+
 
     public function __construct() {
 $this->categorie= new Categorie;
+$this->teacher= new Utilisateur;
+
+
     }
 
     public function __call($name, $arguments) {
@@ -82,6 +89,9 @@ $this->categorie= new Categorie;
     public function getDescription(): string {
          return $this->description;
      }
+     public function getCategorieId(){
+        return $this->categorie_id ; 
+    }
     public function setDescription($description): void {
          $this->description = $description; 
     }
@@ -96,6 +106,11 @@ $this->categorie= new Categorie;
 
 
     }
+
+
+public function getUserId(): int {
+    return $this->user_id;
+}
     public function setEtudiants(array $etudiants): void {
          $this->etudiants = $etudiants; 
     }
@@ -114,15 +129,18 @@ $this->categorie= new Categorie;
     public function setTeacher(Utilisateur $teacher){
      $this->teacher = $teacher ; 
     }
+    public function getTeacher(){
+        return $this->teacher; 
+       }
 
-    public function __toString() {
-        return "(Cours) => id: " . $this->id . 
-            ", titre: " . $this->titre . 
-            ", description: " . $this->description . 
-            ", photo: " . $this->photo . 
-            ", tags: " . implode(", ", $this->tags) . 
-            ", categorie: " . $this->categorie . 
-            ", etudiants: " . implode(",", $this->etudiants);
-    }
+    // public function __toString() {
+    //     return "(Cours) => id: " . $this->id . 
+    //         ", titre: " . $this->titre . 
+    //         ", description: " . $this->description . 
+    //         ", photo: " . $this->photo . 
+    //         ", tags: " . implode(", ", $this->tags) . 
+    //         ", categorie: " . $this->categorie . 
+    //         ", etudiants: " . implode(",", $this->etudiants);
+    // }
 } ?>
 

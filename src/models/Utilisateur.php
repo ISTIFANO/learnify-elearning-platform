@@ -2,7 +2,7 @@
 
 
 require_once 'Role.php';
-require_once PROJECT_ROOT.'\DAOs\DaoGenerator.php';
+require_once PROJECT_ROOT.'\src\DAOs\DaoGenerator.php';
 #[\AllowDynamicProperties]
 class Utilisateur extends DaoGenerator {
     private int $id;
