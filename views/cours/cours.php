@@ -27,7 +27,9 @@
                 <a href="#" class="text-gray-700">CONTACT</a>
                 <a href="#" class="text-gray-700">SE CONNECTER</a>
             </nav>
-            <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600">INSCRIPTION</a>
+           
+            <a href="/login" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600">INSCRIPTION</a>
+            <a href="/SignUp" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600">LOGIN</a>
         </div>
     </header>
     <main class="relative">

@@ -14,7 +14,7 @@
       <!-- Left Column: Signup Form -->
       <div class="lg:w-5/12 w-full order-2 lg:order-1 p-6 bg-white shadow-lg rounded-lg bg-opacity-80">
         <h2 class="text-2xl font-bold mb-2">Sign Up</h2>
-        <p class="text-sm text-gray-600 mb-4">Already have an account? <a href="signin.html" class="text-blue-600 hover:underline">Sign In</a></p>
+        <p class="text-sm text-gray-600 mb-4">Already have an account? <a href="/SignUp" class="text-blue-600 hover:underline">Sign In</a></p>
 
         <form action="#">
          
