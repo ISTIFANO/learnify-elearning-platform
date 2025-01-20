@@ -28,8 +28,9 @@ switch ($route) {
     case 'Tags':
         include '../components/UtilisateursProfiles.php';
         break;
-    case 'users':
-        include '../components/Users.php';
+    case '/users':
+        // C:\wamp64\www\learnify-elearning-platform\views\cours\CourShowingAdmin.php
+        include '../views/cours/CourShowingAdmin.php';
         break;
     case '/':
         include '../views/cours/cours.php';
@@ -40,7 +41,8 @@ switch ($route) {
         break;
 
     case '/AuthController':
-        include '../src/controllers/CoursController.php';
+        // C:\wamp64\www\learnify-elearning-platform\views\cours\CategoriesAdmin.php
+        include '../views/cours/TagsAdmin.php';
         break;
     case 'Logout':
         echo "<div class='content'>

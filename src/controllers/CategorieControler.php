@@ -125,4 +125,9 @@ class CategorieController {
             return ['error' => $e->getMessage()];
         }
     }
+
+    
 }
+
+$cat = new CategorieController;
+$cat->getAllCategories();

@@ -44,7 +44,7 @@ public function findAll($table) {
 
 
     $sql = "SELECT * FROM $table";
-// var_dump($sql);
+//  var_dump($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         // var_dump($stmt);
@@ -61,6 +61,7 @@ public function findAll($table) {
         // $result= $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
+// var_dump($result);
 return $result;
     } catch (Exception $e) {
         return [];

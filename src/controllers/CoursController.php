@@ -206,8 +206,7 @@ class CoursController {
   
        
    $user= $this->coursServices->findAll();
-    //  var_dump( $user);
-
+return $user;
     }
 } 
 
