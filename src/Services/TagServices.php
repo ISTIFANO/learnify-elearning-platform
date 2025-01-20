@@ -48,7 +48,7 @@ return $tagsDeleted ;
     {
 
         $tags = $this->reposetery->findAll("tags");
-
+// var_dump($tags);
         return $tags;
       
     }

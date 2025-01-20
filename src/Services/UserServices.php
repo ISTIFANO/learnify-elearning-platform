@@ -66,7 +66,7 @@ public function findbyEmailAndPassword($email,$password){
     {
         $user = $this->reposetery->findOne($this->Utilisateur,$id);
 
-var_dump(  $user);
+// var_dump(  $user);
         return $user;
     }
     public function countusers($table){

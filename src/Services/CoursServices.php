@@ -88,6 +88,7 @@ private RoleServices $roleServices;
            $cour->setTags($arrayoftags);
            $arrayOfCours[] =  $cour ;
     }
+    // var_dump($arrayOfCours);
     return $arrayOfCours ; 
 }
     public function findCoursByid($id)
