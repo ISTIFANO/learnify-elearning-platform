@@ -30,7 +30,8 @@ class CategorieServices {
 
  
     public function deleteCategorie($id) {
-        $categorieDeleted = $this->repository->delete("categories", $id);
+        // var_dump($id);
+        $categorieDeleted = $this->repository->delete($this->categorie, $id);
         return $categorieDeleted;
     }
 

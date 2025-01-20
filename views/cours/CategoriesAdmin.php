@@ -63,7 +63,7 @@
                         </a>
                         <!-- Delete Button -->
                        
-                        <form action="/users" method="POST" class="inline">
+                        <form action="/SupprimerCat" method="POST" class="inline">
                             <input type="hidden" name="course_id" value="<?= $course->getId() ?>">
                        
 

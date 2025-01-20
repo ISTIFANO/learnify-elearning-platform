@@ -65,10 +65,11 @@ class Utilisateur extends DaoGenerator {
             "lastname" => $this->lastname,
             "email" => $this->email,
             "password" => $this->password,
-            "is_active" => $this->is_active,
             "role_id" => $this->role->getId(),
             "photo" => $this->photo,
-            "phone" => $this->phone
+            "phone" => $this->phone,
+            "is_active" => $this->is_active
+
         ];
     }
 

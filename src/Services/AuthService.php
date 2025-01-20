@@ -17,10 +17,10 @@ class AuthService extends Regex {
         
     }
     public function create($user){
-        // var_dump($user);
-          var_dump($this->roleServices->findRoleByname($user->getRole()->getRoleName()));
+        //  var_dump($user->getRole()->getRoleName());
+        //   var_dump($this->roleServices->findRoleByname($user->getRole()->getRoleName()));
         $user->setRole($this->roleServices->findRoleByname($user->getRole()->getRoleName()));
-        var_dump(  $user);
+        //  var_dump(  $user);
         return $this->repository->create($user);
     }
     public function  loginValidation($email ,$password) {

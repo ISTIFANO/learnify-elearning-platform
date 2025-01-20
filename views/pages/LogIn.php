@@ -16,7 +16,7 @@
         <h2 class="text-2xl font-bold mb-2">Sign Up</h2>
         <p class="text-sm text-gray-600 mb-4">Already have an account? <a href="/signUp" class="text-blue-600 hover:underline">Sign In</a></p>
 
-<form action="/AuthController/login" method="POST" class="w-full">
+<form action="/auth/login" method="POST" class="w-full">
 
     
     <div class="form-element mb-4">

@@ -36,7 +36,7 @@ return $CreateUser;
         return $user;
     }
 public function DeleteUsers($id){
-    
+    // die($id);
 $userDeleted =$this->reposetery->delete($this->Utilisateur,$id);
 
 return $userDeleted ;

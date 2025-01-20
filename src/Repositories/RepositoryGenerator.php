@@ -18,6 +18,7 @@ class RepositoryGenerator{
     ];
     public function __construct()
     {
+        
     }
     public function ClassesChecker($class)
     {
@@ -28,7 +29,7 @@ class RepositoryGenerator{
         }
     }
     public function create($table){
- var_dump($table);
+var_dump($table);
         return $table->create();
   }
   public function delete($table,$id){
@@ -83,19 +84,19 @@ return $result;
 }
 public function findrolebyName($value,$table) {
         $sql = "SELECT * FROM $table WHERE role_name ='".$value."'";
-    //  var_dump($sql);
+      var_dump($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
-            $stmt->execute();
+            $stmt->execute([]);
             // var_dump($stmt);
-            if ($table !== 'cours') {
-                $class = ucfirst(substr($table, 0, -1));            
-                // var_dump($class);
-            }else{
-                $class = ucfirst($table);            
+            // if ($table !== 'cours') {
+            //     $class = ucfirst(substr($table, 0, -1));            
+            //     // var_dump($class);
+            // }else{
+            //     $class = ucfirst($table);            
     
-            }
-            $result= $stmt->fetchObject($this->ClassesChecker($class));
+            // }
+            $result= $stmt->fetchObject($this->ClassesChecker($table));
             //  var_dump($result);
             return $result;
     

@@ -91,8 +91,7 @@ class AuthController
             $createdUser = $this->authService->create($user);
             if ($createdUser) {
                $_SESSION['success'] = "Account created successfully!";
-               header('Location: /login');
-               exit();
+   
             }
          } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
@@ -102,5 +101,3 @@ class AuthController
       }
 }
 }
-$ma = new AuthController ;
-$ma->register();

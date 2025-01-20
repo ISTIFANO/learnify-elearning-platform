@@ -22,6 +22,22 @@ class UserController{
         $this->roleservice = new RoleServices();
 
     }
+    
+    public function deleteUsers($id){
+        try {
+            // die($id);
+            // echo "i m in getAllUsers ";
+            $users = $this->userservice->deleteUsers($id);
+              // var_dump($users);
+      
+        
+                      return    $users;
+
+         }
+         catch(Exception $e){
+            echo $e->getMessage();
+         }
+    }
 
     public function getAllUsers(){
         try {

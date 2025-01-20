@@ -98,7 +98,7 @@ $showall = $userr->getAllUsers();
                                         </svg>
                                     </a>
                                     <!-- Delete Button -->
-                                    <form action="delete_user.php" method="POST" class="inline">
+                                    <form action="/deletedUser" method="POST" class="inline">
                                         <input type="hidden" name="user_id" value="<?= $key->getId() ?>">
                                         <button type="submit" class="text-red-600 hover:text-red-800 rounded-full hover:bg-red-100 p-2 transition" onclick="return confirm('Are you sure you want to delete this user?')">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
