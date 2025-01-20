@@ -35,7 +35,9 @@ return $CreateRoleuser;
     }
     public function findRoleByname($name)
     {
+        // var_dump($name);
         $Roleuser = $this->reposetery->findrolebyName($name, "roles");
+        var_dump( $Roleuser);
         return $Roleuser;
     }
 public function DeleteRoleusers($id){

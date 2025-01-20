@@ -17,15 +17,19 @@ class AuthService extends Regex {
         
     }
     public function create($user){
-        $user->setRole($this->roleServices->findRoleByname($user->getRole()->getname()));
+        //  var_dump($user->getRole()->getRoleName());
+        //   var_dump($this->roleServices->findRoleByname($user->getRole()->getRoleName()));
+        $user->setRole($this->roleServices->findRoleByname($user->getRole()->getRoleName()));
+        //  var_dump(  $user);
         return $this->repository->create($user);
     }
     public function  loginValidation($email ,$password) {
         if($this->ValidationEmail($email)){
             $user = $this->userServices->findbyEmailAndPassword($email,$password);
             if(isset($user)){
-     var_dump($user);
-     var_dump(  $this->roleServices->findRoleByid($user->getId()));
+    //  var_dump($user);
+
+    //  var_dump(  $this->roleServices->findRoleByid($user->getId()));
                $user->SetRole($this->roleServices->findRoleByid($user->getRoleId()));
                var_dump($user->getRole());
                return $user ;

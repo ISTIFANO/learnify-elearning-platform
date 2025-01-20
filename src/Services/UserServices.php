@@ -3,6 +3,7 @@
 
 require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
 require_once PROJECT_ROOT . '\src\Services\RoleServices.php';
+require_once PROJECT_ROOT . '\src\models\Utilisateur.php';
 
 
 
@@ -14,7 +15,8 @@ class UserServices
     private RoleServices $roleServices;
 
     public function __construct()
-    { $this->Utilisateur= new Utilisateur;
+    { 
+        $this->Utilisateur= new Utilisateur;
         $this->reposetery = new RepositoryGenerator;
         $this->roleServices = new RoleServices;
     }
@@ -34,7 +36,7 @@ return $CreateUser;
         return $user;
     }
 public function DeleteUsers($id){
-    
+    // die($id);
 $userDeleted =$this->reposetery->delete($this->Utilisateur,$id);
 
 return $userDeleted ;
@@ -52,21 +54,26 @@ public function findbyEmailAndPassword($email,$password){
 
         $user = $this->reposetery->findAll("utilisateurs");
         // var_dump($user);
+
         foreach ($user  as $users) {
-            $idrole = $this->roleServices->findRoleByid($users->getRoleId());
-            // var_dump($idrole);
- $users->setRoleId($idrole)  ;
+            // var_dump($this->roleServices->findRoleByid($users->getRoleId()));
+            $users->setRole( $this->roleServices->findRoleByid($users->getRoleId()));
+            // var_dump($users);
+            
+    
+                    
 
 
      }
-    //   var_dump($users);
-     return $user;
+    return $user ;
+    
     }
     public function findbyId($id)
     {
         $user = $this->reposetery->findOne($this->Utilisateur,$id);
+        $user->setRole( $this->roleServices->findRoleByid($user->getRoleId()));
 
-// var_dump(  $user);
+//  var_dump(  $user);
         return $user;
     }
     public function countusers($table){

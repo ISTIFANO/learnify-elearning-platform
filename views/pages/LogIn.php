@@ -14,38 +14,25 @@
       <!-- Left Column: Signup Form -->
       <div class="lg:w-5/12 w-full order-2 lg:order-1 p-6 bg-white shadow-lg rounded-lg bg-opacity-80">
         <h2 class="text-2xl font-bold mb-2">Sign Up</h2>
-        <p class="text-sm text-gray-600 mb-4">Already have an account? <a href="/SignUp" class="text-blue-600 hover:underline">Sign In</a></p>
+        <p class="text-sm text-gray-600 mb-4">Already have an account? <a href="/signUp" class="text-blue-600 hover:underline">Sign In</a></p>
 
-        <form action="#">
-         
-          <div class="form-element mb-4">
-            <label for="email" class="block text-gray-700 mb-2">Email</label>
-            <span class="text-xs text-red-500">*please enter a valid email</span>
-            <input type="email" placeholder="arifAhmed@gmail.com" id="email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          </div>
+<form action="/auth/login" method="POST" class="w-full">
 
-        
+    
+    <div class="form-element mb-4">
+        <label for="email" class="block text-gray-700 mb-2">Email</label>
+        <input type="email" name="email" required placeholder="email@example.com" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
-          <!-- Confirm Password -->
-          <div class="form-element mb-4">
-            <label for="confirm-password" class="block text-gray-700 mb-2"> Password</label>
-            <input type="password" placeholder="Type here..." id="confirm-password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePasswordVisibility('confirm-password')">
-             
-            </div>
-          </div>
+    <div class="form-element mb-4">
+        <label for="password" class="block text-gray-700 mb-2">Password</label>
+        <input type="password" name="password" required placeholder="Enter your password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
-        
-
-          <!-- Submit Button -->
-          <div class="form-element mb-4">
-            <a href="./SignUp.php">
-            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700">Sign Up</button>
-            </a>  </div>
-
-
-         
-        </form>
+    <div class="form-element mb-4">
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700">Sign In</button>
+    </div>
+</form>
       </div>
 
       

@@ -41,7 +41,7 @@ abstract class DaoGenerator
         // var_dump($values);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
-            var_dump($stmt);
+            // var_dump($stmt);
             $stmt->execute($values);
             // echo "############################";
 
@@ -49,7 +49,7 @@ abstract class DaoGenerator
                 ->getConnection()
                 ->lastInsertId();
 
-           echo '<h1>'.  $id.'</h1>';
+        //    echo '<h1>'.  $id.'</h1>';
 
             return $id;
         } catch (Exception $e) {
@@ -88,7 +88,6 @@ abstract class DaoGenerator
     {
         $table = $this->tablename();
         $sql = "SELECT * FROM $table";
-
     //    echo   $sql;
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);

@@ -1,50 +1,97 @@
 <?php
 define('PROJECT_ROOT', dirname(dirname(__DIR__ . '/../')));
+require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+// require_once PROJECT_ROOT . '\src\Services\UserServices.php';
 
-// require_once .'/DAOs\DaoGenerator.php';
+session_start();
+// C:\wamp64\www\learnify-elearning-platform\src\controllers\AuthController.php
+require_once PROJECT_ROOT . '\src\controllers\AuthController.php';
+require_once PROJECT_ROOT . '\src\controllers\CategorieControler.php';
+require_once PROJECT_ROOT . '\src\controllers\UserController.php';
 
-// echo PROJECT_ROOT;
+
+
+
+
+
+function requireAuth()
+{
+    if (!Utils::isLoggedIn()) {
+        Utils::redirect("login");
+        exit();
+    };
+}
+
 $route = $_SERVER['REQUEST_URI'];
 
 
-// $page = $_GET['action'];
 
 switch ($route) {
+ 
+case '/deletedUser' :
+    $deletedUses = new UserController();
+    $deletedUses->deleteUsers($_POST["user_id"]);
+    header("location: /utilisateurs");
+    break;
+
     case '/Categories':
-        // echo '\src\views\components\UtilisateursProfiles.php';
-        // C:\wamp64\www\learnify-elearning-platform\views\components\UtilisateursProfiles.php
-        include '../views/components/UtilisateursProfiles.php';
+        include '../views/cours/CategoriesAdmin.php';
         break;
-        case '/DashboardAdmin':
-           
-            include '../views/admin/dashboard.php';
+        case '/SupprimerCat':
+            $categoeie = new CategorieController();
+        $categoeie->deleteCategory($_POST["course_id"]);
+        header("location: /Categories");
             break;
+    case '/DashboardAdmin':
+
+        include '../views/admin/dashboard.php';
+        break;
     case '/login':
         include '../views/pages/LogIn.php';
         break;
     case '/signUp':
+
         include '../views/pages/SignUp.php';
+
         break;
-    case 'Tags':
-        include '../components/UtilisateursProfiles.php';
+    case '/Tags':
+        include  '../views/cours/TagsAdmin.php';
+        break;
+    case '/Courses':
+        include  '../views/cours/CourShowingAdmin.php';
         break;
     case '/users':
-        // C:\wamp64\www\learnify-elearning-platform\views\cours\CourShowingAdmin.php
         include '../views/cours/CourShowingAdmin.php';
         break;
     case '/':
         include '../views/cours/cours.php';
         break;
-    case 'Utilisateurs':
-        include '../components/UtilisateursProfiles.php';
+    case '/utilisateurs':
+        include '../views/components/Users.php';
 
         break;
 
     case '/AuthController':
-        // C:\wamp64\www\learnify-elearning-platform\views\cours\CategoriesAdmin.php
-        include '../views/cours/TagsAdmin.php';
+        $ma = new AuthController;
+        $ma->register();
+        header("location: /login");
+        // include '../src/controllers/AuthController.php';
         break;
-    case 'Logout':
+    case '/auth/login':
+        $ma = new AuthController;
+        $ma->login();
+        // include '../src/controllers/AuthController.php';
+        break;
+    case '/DashboardEnseignant':
+        include '../views/Enseignant/statistic.php';
+        break;
+    case '/MesCoursEnseignant':
+        include '../views/Enseignant/MesCours.php';
+        break;
+    case '/EtudiantdeEnseignant':
+        include '../views/Enseignant/Etudiant.php';
+        break;
+    case 'LogoutAdmin':
         echo "<div class='content'>
     <h2>Déconnexion</h2>
     <p>Vous avez été déconnecté.</p>

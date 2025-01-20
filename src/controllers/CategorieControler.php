@@ -82,8 +82,10 @@ class CategorieController {
 
     
     public function deleteCategory($id) {
+        $iddeleted=(int)$id;
+        var_dump( $iddeleted);
         try {
-            $result = $this->categorieServices->deleteCategorie($id);
+            $result = $this->categorieServices->deleteCategorie($iddeleted);
             if ($result) {
                 return ['success' => 'Category deleted successfully'];
             }
