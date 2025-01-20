@@ -1,56 +1,106 @@
 <?php
-//    define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
-echo PROJECT_ROOT;
-require_once PROJECT_ROOT . '\src\Services\UserServices.php';
 require_once PROJECT_ROOT . '\src\Services\AuthService.php';
-require_once PROJECT_ROOT . '\src\models\Utilisateur.php';
-require_once PROJECT_ROOT . '\src\models\Role.php';
 
-// require_once PROJECT_ROOT . '\Repositories\RepositoryGenerator.php';
-// C:\wamp64\www\learnify-elearning-platform\src\models\Utilisateur.php
+class AuthController
+{
+   private AuthService $authService;
 
+   public function __construct()
+   {
+      $this->authService = new AuthService();
+   }
 
- class AuthController {
-    private AuthService $authservice ;
-    private UserServices $userServices;
-    public function __construct() {
-        $this->authservice = new AuthService() ; 
+   public function login()
+   {
+      // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+      $password = $_POST['password'];
 
-        
-    } 
-   
-    public function createUser(){
-      $id=8;
-        $lastname = "Aamir"; 
-        $firstname = "Aamir"; 
-$phone=234567890;
-        $email = "aamir@mferble.com";
-        $password = "4567890";
-        $rolename = "STUDENT";
-        $status = "active" ;
-        if($rolename=="STUDENT"){
-           $status = "Pending";
-        }
-        $photo = "asc.png";
-        $role = new Role ; 
-        $role->RoleBuilder($rolename);
-        $user = new Utilisateur;
-        $user->BuilderUser($id,$firstname , $lastname , $email , $password ,$phone,$photo ,$status , $role );
-
-
-    }
-    public function Login($email , $password ){
       try {
-            $this->authservice->loginValidation($email , $password) ;
-
-            // header("Location: /Categories");
+         $user = $this->authService->loginValidation($email, $password);
+         if ($user) {
+            $_SESSION['user'] = [
+               'id' => $user->getId(),
+               'name' => $user->getName(),
+               'email' => $user->getEmail(),
+               'role' => $user->getRole()->getRoleName(),
+               'status' => $user->getIsValide()
+            ];
+            var_dump($_SESSION['user']);
+            // Redirect based on role
+            switch ($user->getRole()->getRoleName()) {
+               case 'ADMIN':
+                  header('Location: /DashboardAdmin');
+                  break;
+               case 'TEACHER':
+                  header('Location: /DashboardEnseignant');
+                  break;
+               case 'STUDENT':
+                  header('Location: /');
+                  break;
+               default:
+                  header('Location: /');
+            }
+            exit();
+         }
+      } catch (Exception $e) {
+         $_SESSION['error'] = $e->getMessage();
+         header('Location: /login');
+         exit();
       }
-      catch(Exception $e){
-         return $e->getMessage();
-      }
-    }
- }
+   }
 
- $AuthController = new AuthController();
-$AuthController->Login("bob.martin@example.com","password456");
-?>
+
+   public function register()
+   {
+      // echo "vgbhnj,k;l:m";
+      echo "AScascasc";
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+         // echo $_POST['firstname'];
+         // echo "AScascascasc";
+      
+         $firstname = $_POST['firstname'];
+         $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+         $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+         $rolename = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+ echo $rolename;
+         $role = new Role();
+         $role->RoleBuilder($rolename);
+
+         if ($rolename == "STUDENT") {
+            $status = "Pending";
+         } else {
+            $status = "active";
+         }
+         try {
+            $user = new Utilisateur();
+            $user->BuilderUser(
+               1,
+               $firstname,
+               $lastname,
+               $email,
+               $password,
+               $phone,
+               'https://th.bing.com/th/id/OIP.qajuNYox10xSQV4SvryD1AHaHa?w=183&h=183&c=7&r=0&o=5&dpr=1.1&pid=1.7',
+               $status,
+               $role
+            );
+
+            $createdUser = $this->authService->create($user);
+            if ($createdUser) {
+               $_SESSION['success'] = "Account created successfully!";
+               header('Location: /login');
+               exit();
+            }
+         } catch (Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: /signup');
+            exit();
+         }
+      }
+}
+}
+$ma = new AuthController ;
+$ma->register();

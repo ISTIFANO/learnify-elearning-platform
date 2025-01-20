@@ -1,106 +1,118 @@
 <?php
-
-require_once  '../../models/Categorie.php';
-require_once '../../models/Tag.php';
-require_once '../../models/Role.php';
-require_once '../../models/Utilisateur.php';
-require_once '../../models/Cours.php';
-require_once '../../DAOs/DaoGenerator.php';
-
-// class Test for testing purposes
-class Test {
+// AuthController.php
+class AuthController {
+    private AuthService $authService;
 
     public function __construct() {
-        // Constructor if needed (currently not used)
+        $this->authService = new AuthService();
     }
 
-    public function TestCours() {
-        //  role 
-        $roleUser = new Role;
-        $roleUser->RoleBuilder("testTags", "TagsTZZZESZ");
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+            $password = $_POST['password'];
 
-        //  user 
-        $user22 = new Utilisateur;
-        $user22->BuilderUser(7, "admin@gmihsdhl.com", "adsdLOve", $roleUser);
-        var_dump($user22);
+            try {
+                $user = $this->authService->loginValidation($email, $password);
+                if ($user) {
+                    $_SESSION['user'] = [
+                        'id' => $user->getId(),
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'role' => $user->getRole()->getRoleName(),
+                        'status' => $user->getIsValide()
+                    ];
+                    
+                    // Redirect based on role
+                    switch($user->getRole()->getRoleName()) {
+                        case 'ADMIN':
+                            header('Location: /DashboardAdmin');
+                            break;
+                        case 'TEACHER':
+                            header('Location: /DashboardEnseignant');
+                            break;
+                        case 'STUDENT':
+                            header('Location: /');
+                            break;
+                        default:
+                            header('Location: /');
+                    }
+                    exit();
+                }
+            } catch (Exception $e) {
+                $_SESSION['error'] = $e->getMessage();
+                header('Location: /login');
+                exit();
+            }
+        }
+    }
 
-        // user
-        $user = new Utilisateur;
-        $user->BuilderUser(7,"admin@gmihsdhl.com", "adsdLOve");
-        var_dump($user);
-        $utidiants = [];
-        $utidiants[]=$user22;
+    public function register() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+            $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+            $rolename = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+            
+            $role = new Role();
+            $role->RoleBuilder($rolename);
+            
+            $status = ($rolename == "STUDENT") ? "Pending" : "active";
+            
+            try {
+                $user = new Utilisateur();
+                $user->BuilderUser(
+                    null, 
+                    $firstname, 
+                    $lastname, 
+                    $email, 
+                    $password, 
+                    $phone, 
+                    'default.png', 
+                    $status, 
+                    $role
+                );
+                
+                $createdUser = $this->authService->create($user);
+                if ($createdUser) {
+                    $_SESSION['success'] = "Account created successfully!";
+                    header('Location: /login');
+                    exit();
+                }
+            } catch (Exception $e) {
+                $_SESSION['error'] = $e->getMessage();
+                header('Location: /signup');
+                exit();
+            }
+        }
+    }
 
-        //tags
-        $tagsA = [];
-        $tagName = new Tag;
-        $tagName->TagBuilder(1,"testTags", "TagsTZZZESZ");
-        $tagsA[] = $tagName;
-
-        //category
-        $category = new Categorie;
-        $category->CategorieBuilder(1, "testCATEGORIE", "TestshCat");
-        var_dump($category);
-
-        
-        $user11 = new Utilisateur;
-        $user11->BuilderUser(3,"admin@gmihsdhl.com", "adsdLOve");
-        $userEtud = [];
-        $userEtud[] = $user11;
-        var_dump($userEtud);
-        // $this->id = $arguments[0];
-        // $this->titre = $arguments[1];
-        // $this->description = $arguments[2];
-        // $this->contenue = $arguments[3];
-        // $this->categorie = $arguments[4];
-        // $this->etudiants = $arguments[5];   
-        // $this->teacher = $arguments[6];   
-
-        // $this->tags = $arguments[7];   
-        // $this->photo = $arguments[8];
-        // course
-      
-
-        // role
-        $role = new Role;
-        $role->RoleBuilder(3, "testTags", "RagsTZZZESZ");
-        $userq = new Utilisateur();
-        $userq->BuilderUser(
-            3, 
-            "john@example.com", 
-            "password123", 
-            "password123", 
-            "sdsdd", 
-            2345678, 
-            "photo.png", 
-            "pending", 
-            $role
-        );
-        var_dump($userq);
-        $builder = new Cours;
-        $builder->CoursBuilder(
-            21,
-            "Le Roi",
-            "azertyuiop",
-            "video4",
-            $category,
-            $utidiants,
-            $user,  
-            $tagsA,
-            "cover.png"
-        );
-  
-        var_dump($builder);
-
-        // $ver =$builder->create();
-        // var_dump($ver);
-
+    public function logout() {
+        session_destroy();
+        header('Location: /login');
+        exit();
     }
 }
 
-$cours = new Test;
-$cours->TestCours();
+// AuthService.php modifications
+class AuthService extends Regex {
+    public function loginValidation($email, $password) {
+        if (!$this->ValidationEmail($email)) {
+            throw new Exception("Invalid email format");
+        }
 
-var_dump($cours);
+        $user = $this->userServices->findbyEmailAndPassword($email, $password);
+        if (!$user) {
+            throw new Exception("Invalid credentials");
+        }
 
-?>
+        if ($user->getIsValide() !== 'active') {
+            throw new Exception("Account is not active");
+        }
+
+        $user->setRole($this->roleServices->findRoleByid($user->getRoleId()));
+        return $user;
+    }
+}

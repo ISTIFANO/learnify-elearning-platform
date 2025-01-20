@@ -8,13 +8,27 @@ require_once PROJECT_ROOT.'\src\DAOs\DaoGenerator.php';
 
 class RepositoryGenerator{
 
-
+    private  $classes = [
+        "utilisateurs" => Utilisateur::class,
+        "cours" => Cours::class,
+        "categories" => Categorie::class,
+        "inscription" => Inscription::class,
+        "roles" => Role::class,
+        "tags" => Tag::class
+    ];
     public function __construct()
     {
     }
-
+    public function ClassesChecker($class)
+    {
+        foreach ($this->classes as $key => $value) {
+            if ($class == $key) {
+                return $value;
+            }
+        }
+    }
     public function create($table){
-// var_dump($table);
+ var_dump($table);
         return $table->create();
   }
   public function delete($table,$id){
@@ -31,7 +45,7 @@ public function update($table,$id){
 }
 public function findOne($table,$id){
      
-//    var_dump($table,$id);
+   
     return $table->FindById($id);
 }
 public function read($table){
@@ -68,9 +82,8 @@ return $result;
     }
 }
 public function findrolebyName($value,$table) {
-    //    echo $field, $value,$table;
         $sql = "SELECT * FROM $table WHERE role_name ='".$value."'";
-    // var_dump($sql);
+    //  var_dump($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute();
@@ -82,8 +95,8 @@ public function findrolebyName($value,$table) {
                 $class = ucfirst($table);            
     
             }
-            $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
-            // var_dump($result);
+            $result= $stmt->fetchObject($this->ClassesChecker($class));
+            //  var_dump($result);
             return $result;
     
         } catch (Exception $e) {
@@ -93,7 +106,7 @@ public function findrolebyName($value,$table) {
 public function findByField(string $field, $value,$table) {
 //    echo $field, $value,$table;
     $sql = "SELECT * FROM $table WHERE $field ='".$value."'";
-// var_dump($sql);
+//  var_dump($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();

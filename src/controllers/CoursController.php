@@ -102,37 +102,37 @@ class CoursController {
     }
 
 
-    public function updateCourse($id, $data) {
-        try {
-            $existingCourse = $this->coursServices->findCoursById($id);
-            if (!$existingCourse) {
-                return   
-                ['error' => 'error'];
-            }
+    // public function updateCourse($id, $data) {
+    //     try {
+    //         $existingCourse = $this->coursServices->findCoursById($id);
+    //         if (!$existingCourse) {
+    //             return   
+    //             ['error' => 'error'];
+    //         }
 
-            if (isset($data['categorie_id'])) {
-                $categorie = $this->categorieServices->findCategorieById($data['categorie_id']);
-                if (!$categorie) {
-                    return ['error' => 'error'];
-                    ;
-                }
-                $existingCourse->setCategorie($categorie);
-            }
+    //         if (isset($data['categorie_id'])) {
+    //             $categorie = $this->categorieServices->findCategorieById($data['categorie_id']);
+    //             if (!$categorie) {
+    //                 return ['error' => 'error'];
+    //                 ;
+    //             }
+    //             $existingCourse->setCategorie($categorie);
+    //         }
 
-            if (isset($data['titre'])) $existingCourse->setTitre($data['titre']);
-            if (isset($data['description'])) $existingCourse->setDescription($data['description']);
-            if (isset($data['contenue'])) $existingCourse->setContenue($data['contenue']);
-            if (isset($data['photo'])) $existingCourse->setPhoto($data['photo']);
+    //         if (isset($data['titre'])) $existingCourse->setTitre($data['titre']);
+    //         if (isset($data['description'])) $existingCourse->setDescription($data['description']);
+    //         if (isset($data['contenue'])) $existingCourse->setContenue($data['contenue']);
+    //         if (isset($data['photo'])) $existingCourse->setPhoto($data['photo']);
 
-            $result = $this->coursServices->updateCours($existingCourse, $id);
+    //         $result = $this->coursServices->updateCours($existingCourse, $id);
             
-            return $result ? 
-            ['succ' => 'succ'] : 
-                ['error' => 'error'];
-        } catch(Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
-    }
+    //         return $result ? 
+    //         ['succ' => 'succ'] : 
+    //             ['error' => 'error'];
+    //     } catch(Exception $e) {
+    //         return ['error' => $e->getMessage()];
+    //     }
+    // }
 
     public function deleteCourse($id) {
         try {
@@ -225,7 +225,7 @@ $coursController = new CoursController();
 
 // $coursController->AddStudentCours(107,3);
 
-    $coursController->read();
+    $coursController->getCoursesByTeacher(3);
 // // Rechercher des cours
 // $courses = $coursController->searchCourses('Python Programming');
 

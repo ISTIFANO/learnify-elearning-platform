@@ -12,7 +12,7 @@
 
         <!-- Users -->
         <li class="mb-4">
-            <a href="/Statistic" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+            <a href="/DashboardEnseignant" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
                 <span class="icon text-2xl">
                     <ion-icon name="people-outline"></ion-icon>
                 </span>
@@ -20,33 +20,25 @@
             </a>
         </li>
 
-        <!-- Tags -->
-        <li class="mb-4">
-            <a href="/Tags" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
-                <span class="icon text-2xl">
-                    <ion-icon name="chatbubble-outline"></ion-icon>
-                </span>
-                <span class="title text-lg">Tags</span>
-            </a>
-        </li>
+        
 
         <!-- Categories -->
         <li class="mb-4">
-            <a href="/Categories" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+            <a href="/MesCoursEnseignant" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
                 <span class="icon text-2xl">
                     <ion-icon name="help-outline"></ion-icon>
                 </span>
-                <span class="title text-lg">Categories</span>
+                <span class="title text-lg">Mes Cours</span>
             </a>
         </li>
 
         <!-- Settings -->
         <li class="mb-4">
-            <a href="/utilisateurs" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
+            <a href="/EtudiantdeEnseignant" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
                 <span class="icon text-2xl">
                     <ion-icon name="settings-outline"></ion-icon>
                 </span>
-                <span class="title text-lg">Utilisateurs</span>
+                <span class="title text-lg">Etudiant</span>
             </a>
         </li>
 
@@ -59,13 +51,6 @@
                 <span class="title text-lg">Logout</span>
             </a>
         </li>
-        <li class="mb-4">
-            <a href="/Courses" class="flex items-center space-x-4 hover:bg-white hover:text-blue-900 rounded-lg p-2">
-                <span class="icon text-2xl">
-                    <ion-icon name="settings-outline"></ion-icon>
-                </span>
-                <span class="title text-lg">Utilisateurs</span>
-            </a>
-        </li>
+        
     </ul>
 </div>

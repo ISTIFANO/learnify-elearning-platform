@@ -2,9 +2,11 @@
 //  define('PROJECT_ROOT', dirname(dirname(dirname(__DIR__ . '/../'))));
 
 require_once PROJECT_ROOT.'\src\models\Utilisateur.php';
- echo PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
+//  echo PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
 require_once PROJECT_ROOT . '\src\Repositories\RepositoryGenerator.php';
 require_once PROJECT_ROOT . '\src\Services\UserServices.php';
+require_once PROJECT_ROOT . '\src\Services\RoleServices.php';
+
 
 
  
@@ -12,14 +14,24 @@ class UserController{
 
     // private Utilisateur $user ;
     private UserServices $userservice ;
+    private RoleServices $roleservice ;
+
+
     public function __construct() {
         $this->userservice = new UserServices();
+        $this->roleservice = new RoleServices();
+
     }
 
     public function getAllUsers(){
         try {
             // echo "i m in getAllUsers ";
-                      return   $this->userservice->findAll();
+            $users = $this->userservice->findAll();
+              // var_dump($users);
+      
+        
+                      return    $users;
+
          }
          catch(Exception $e){
             echo $e->getMessage();

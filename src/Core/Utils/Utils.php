@@ -1,7 +1,7 @@
 <?php
 
-
-class Aleart{
+define('BASE_URL', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" . "://" . $_SERVER['HTTP_HOST']);
+class Utils{
 
 
     public function Aleartmsg($type, $message) {
@@ -10,6 +10,21 @@ class Aleart{
                   <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
                 </div>';
       }
+
+
+public static function redirect($page) {
+  $home_url = BASE_URL;
+  header('location: ' . $home_url . '/' . $page);
+}
+
+public static function isLoggedIn() {
+  if (isset($_SESSION['user'])) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 } 
 

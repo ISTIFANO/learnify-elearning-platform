@@ -88,7 +88,6 @@ abstract class DaoGenerator
     {
         $table = $this->tablename();
         $sql = "SELECT * FROM $table";
-
     //    echo   $sql;
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);

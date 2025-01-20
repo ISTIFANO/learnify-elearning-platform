@@ -41,6 +41,7 @@ class Utilisateur extends DaoGenerator {
                 $this->is_active = $arguments[7];
                 $this->role = $arguments[8];
             }
+            
             if(count($arguments) == 8){
                 $this->id = $arguments[0];
                 $this->firstname = $arguments[1];
@@ -74,7 +75,7 @@ class Utilisateur extends DaoGenerator {
     public function setId(int $id): void { 
         $this->id = $id;
      }
-    public function getId(): int {
+    public function getId(){
         
         return $this->id; 
     
