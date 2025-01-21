@@ -12,16 +12,21 @@
 
     <div class="flex h-screen">
 
-        <?php include('../views/components/SideBarEnseignant.php'); ?>
+        <!-- Sidebar -->
+        <?php include('../views/components/SideBarEtudiant.php'); ?>
 
-        <div class="ml-72 flex-1 p-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Main Content -->
+        <div class="ml-72 flex-1 p-6 overflow-auto">
+
+            <!-- Courses Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
                 <?php
                 require_once PROJECT_ROOT . '\src\controllers\CoursController.php';
 
                 $coursController = new CoursController;
 
-                foreach ($coursController->getCoursesByTeacher($_SESSION['user']['id']) as $course): ?>
+                foreach ($coursController->read() as $course): ?>
                     <div class="bg-white rounded-lg shadow-md overflow-hidden">
                         <img src="<?= htmlspecialchars($course->getPhoto()) ?>" alt="Course Image" class="w-full h-48 object-cover">
 
@@ -31,16 +36,21 @@
                         </div>
 
                         <div class="flex justify-between p-4 bg-gray-50">
-                            <button class="px-4 py-2 bg-blue-500 text-white rounded-md">Edit</button>
-                            <button class="px-4 py-2 bg-red-500 text-white rounded-md">Delete</button>
+                          <form action="/CoursDetails" method="post" >
+                          <input type="hidden" name="idcourses" value="<?= $course->getId() ?>">
+
+                          <input type="submit" value="S'inscrire" name="siscrir" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">
+                          </form>
                         </div>
+
                     </div>
                 <?php endforeach; ?>
+
             </div>
         </div>
-
     </div>
 
+    <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

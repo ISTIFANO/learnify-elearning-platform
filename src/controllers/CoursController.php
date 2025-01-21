@@ -32,7 +32,7 @@ class CoursController {
 
     public function getCourseById($id) {
         try {
-            $course = $this->coursServices->findCoursById($id);
+            $course = $this->coursServices->findCoursId($id);
             if (!$course) {
                 return ['error' => 'Course not found'];
             }
@@ -180,6 +180,15 @@ class CoursController {
             return ['error' => $e->getMessage()];
         }
     }
+   
+    public function getMesCourses($id) {
+       
+        try {
+            return $this->coursServices->getByFields("user_id",$id);
+        } catch(Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
 
     public function getCoursesByCategory($categoryId) {
         try {
@@ -209,8 +218,9 @@ class CoursController {
 return $user;
     }
 } 
-
-$coursController = new CoursController();
+// $ma = new CoursController;
+//             $ma->getMesCourses($_SESSION["user"]["id"]);
+// $coursController = new CoursController();
 
 // $newCourse = $coursController->createCourse([
 //     'id'=>22,
@@ -225,7 +235,7 @@ $coursController = new CoursController();
 
 // $coursController->AddStudentCours(107,3);
 
-    $coursController->getCoursesByTeacher(3);
+    // $coursController->getCoursesByTeacher(3);
 // // Rechercher des cours
 // $courses = $coursController->searchCourses('Python Programming');
 

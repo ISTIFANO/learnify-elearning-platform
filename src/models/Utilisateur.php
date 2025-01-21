@@ -21,6 +21,10 @@ class Utilisateur extends DaoGenerator {
     }
     public function __call($name, $arguments) {
         if($name == "BuilderUser"){
+            if(count($arguments) == 1){
+                $this->id = $arguments[0];
+        }
+        if($name == "BuilderUser"){
             if(count($arguments) == 2){
                 $this->email = $arguments[0];
                 $this->password = $arguments[1];
@@ -54,7 +58,7 @@ class Utilisateur extends DaoGenerator {
             }
         }
     }
-
+}
     public function tablename(): string {
         return 'utilisateurs';
     }

@@ -53,7 +53,7 @@ private RoleServices $roleServices;
     public function getByFields($field, $value) {
         $courses = $this->repository->findByField($field, $value, "cours");
 
-    //    var_dump($courses);
+       var_dump($courses);
         return $courses;
     }
     public function findByFieldSearch($field, $value) {
@@ -91,30 +91,39 @@ private RoleServices $roleServices;
     // var_dump($arrayOfCours);
     return $arrayOfCours ; 
 }
-    public function findCoursByid($id)
-    {
 
+public function findCoursId($id){
+    $CoursById = $this->repository->FindCoursById($this->cours,$id);
+// var_dump($CoursById);
+return $CoursById;
+
+}
+    public function findCoursByid($id)
+    {   
+        // echo $id; 
+        // die();
         $CoursById = $this->repository->FindCoursById($this->cours,$id);
-        // var_dump($this->generalrepository->getAll($this->cour));
-        // var_dump( $courses);
+       
         $arrayOfCours = []; 
+        // var_dump($CoursById);
         foreach($CoursById as $cour){
+            echo($cour->getUserId());
+            // die();
             $categorie = new Categorie ;
             $categorieservice= new CategorieServices ;
             $userservice = new UserServices ;
-            // echo $cour->getId();
+           echo  $cour->getUserId();
             $cour->setTeacher($userservice->findById($cour->getUserId()));
             $cour->setCategorie($categorieservice->findCategorieById($cour->getCategorieId()));
            $tags =  $this->repoTagsCours->foundById($cour->getId());
-        //    die(  $tags );
-           $arrayoftags = []; 
+           $arrayoftags = [];
            foreach($tags as $tag ){
            $arrayoftags[] = $this->tagServices->findByid($tag->tag_id);
            }
            $cour->setTags($arrayoftags);
            $arrayOfCours[] =  $cour ;
     }
-     var_dump($arrayOfCours);
+    
     return $arrayOfCours ; 
 //  var_dump( $CoursById);
         return $CoursById;

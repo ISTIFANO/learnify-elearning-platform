@@ -60,10 +60,10 @@ abstract class DaoGenerator
 
     public function FindById(int $id)
     {
-        // var_dump($id);
+        //  var_dump($id);
         $table = $this->tablename();
         $sql = "SELECT * FROM $table WHERE id = ?";
-        // var_dump($sql);
+        //  echo ($sql);
         try {
             $stmt = Database::getInstance()->getConnection()->prepare($sql);
             $stmt->execute([$id]);

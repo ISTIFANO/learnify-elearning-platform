@@ -19,7 +19,10 @@
             <div class="w-full overflow-x-auto bg-white rounded-lg shadow">
                 <section>
                     <div class="p-4 border-b border-gray-200">
-                        <h2 class="text-xl font-semibold text-gray-800">Liste des cours</h2>
+                        <h2 class="text-xl font-semibold text-gray-800">Liste des cours</h2><button id="openFormBtn" class="mt-4 p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+    Ajouter
+</button>
+
                     </div>
 
                     <table class="w-full min-w-full divide-y divide-gray-200">
@@ -95,6 +98,32 @@
         </div>
 
     </div>
+<!-- Button to trigger the popup -->
+
+
+<!-- The Popup Form -->
+<div id="popupForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-96">
+        <span id="closeBtn" class="absolute top-2 right-2 text-gray-600 cursor-pointer text-2xl">&times;</span>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Ajouter un nouveau cours</h2>
+
+        <!-- Form -->
+        <form action="/ajouter_cat" method="POST">
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium text-gray-700">Titre</label>
+                <input type="text" id="title" name="title" required class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" required rows="3" class="mt-1 p-2 w-full border border-gray-300 rounded-md"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
 
     <!-- Scripts -->
     <script src="../../public/js/main.js"></script>
@@ -102,7 +131,28 @@
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+   
+    const popupForm = document.getElementById('popupForm');
+    const openFormBtn = document.getElementById('openFormBtn');
+    const closeBtn = document.getElementById('closeBtn');
 
+  
+    openFormBtn.addEventListener('click', () => {
+        popupForm.classList.remove('hidden');
+    });
+
+  
+    closeBtn.addEventListener('click', () => {
+        popupForm.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === popupForm) {
+            popupForm.classList.add('hidden');
+        }
+    });
+</script>
 </body>
 
 </html>

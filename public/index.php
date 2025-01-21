@@ -9,65 +9,74 @@ require_once PROJECT_ROOT . '\src\controllers\AuthController.php';
 require_once PROJECT_ROOT . '\src\controllers\CategorieControler.php';
 require_once PROJECT_ROOT . '\src\controllers\UserController.php';
 
-
-
-
-
-
-function requireAuth()
-{
-    if (!Utils::isLoggedIn()) {
-        Utils::redirect("login");
-        exit();
-    };
-}
+require_once PROJECT_ROOT . '\src\controllers\CoursController.php';
 
 $route = $_SERVER['REQUEST_URI'];
 
 
 
 switch ($route) {
- 
-case '/deletedUser' :
-    $deletedUses = new UserController();
-    $deletedUses->deleteUsers($_POST["user_id"]);
-    header("location: /utilisateurs");
-    break;
+
+    case '/deletedUser':
+        $deletedUses = new UserController();
+        $deletedUses->deleteUsers($_POST["user_id"]);
+        header("location: /utilisateurs");
+        break;
 
     case '/Categories':
-        include '../views/cours/CategoriesAdmin.php';
+        require_once '../views/cours/CategoriesAdmin.php';
         break;
-        case '/SupprimerCat':
-            $categoeie = new CategorieController();
+    case '/SupprimerCat':
+        $categoeie = new CategorieController();
         $categoeie->deleteCategory($_POST["course_id"]);
         header("location: /Categories");
-            break;
+        break;
     case '/DashboardAdmin':
 
-        include '../views/admin/dashboard.php';
+        require_once '../views/admin/dashboard.php';
+        break;
+    case '/SinscrirCours':
+
+        $categoeie = new CoursController();
+        $categoeie->AddStudentCours($_SESSION["user"]["id"], $_POST["siscrir"]);
+        header("location: /MesCoursEtudiant");
+
+        break;
+    case '/DashboardEtudiant':
+        // C:\wamp64\www\learnify-elearning-platform\views\Etudiant\dashboard.php
+        require_once '../views/Etudiant/dashboard.php';
+        break;
+        case '/CoursDetails':
+            require_once '../views/cours/CoursDetails.php';
+            break;
+    case '/MesCoursEtudiant':
+        require_once '../views/Etudiant/MesCoursEtudiant.php';
+        break;
+    case '/Allcources':
+        require_once '../views/Etudiant/Allcources.php';
         break;
     case '/login':
-        include '../views/pages/LogIn.php';
+        require_once '../views/pages/LogIn.php';
         break;
     case '/signUp':
 
-        include '../views/pages/SignUp.php';
+        require_once '../views/pages/SignUp.php';
 
         break;
     case '/Tags':
-        include  '../views/cours/TagsAdmin.php';
+        require_once  '../views/cours/TagsAdmin.php';
         break;
     case '/Courses':
-        include  '../views/cours/CourShowingAdmin.php';
+        require_once  '../views/cours/CourShowingAdmin.php';
         break;
     case '/users':
-        include '../views/cours/CourShowingAdmin.php';
+        require_once '../views/cours/CourShowingAdmin.php';
         break;
     case '/':
-        include '../views/cours/cours.php';
+        require_once '../views/cours/cours.php';
         break;
     case '/utilisateurs':
-        include '../views/components/Users.php';
+        require_once '../views/components/Users.php';
 
         break;
 
@@ -76,6 +85,13 @@ case '/deletedUser' :
         $ma->register();
         header("location: /login");
         // include '../src/controllers/AuthController.php';
+        break;
+
+    case '/CoursController':
+
+        // header("location: /login");
+        // C:\wamp64\www\learnify-elearning-platform\src\controllers\CoursController.php
+        require_once '../src/controllers/InscriptionController.php';
         break;
     case '/auth/login':
         $ma = new AuthController;
@@ -92,10 +108,7 @@ case '/deletedUser' :
         include '../views/Enseignant/Etudiant.php';
         break;
     case 'LogoutAdmin':
-        echo "<div class='content'>
-    <h2>Déconnexion</h2>
-    <p>Vous avez été déconnecté.</p>
-</div>";
+        echo $_SESSION["user"];
         break;
     case 'dashboard':
     default:
