@@ -18,10 +18,9 @@ $showall = $userr->getAllUsers();
 
 <body class="bg-gray-100">
 
-    <!-- Order Details List -->
     <div class="flex h-screen">
 
-        <!-- Include Sidebar -->
+        
         <?php include('../views/components/SideBar.php'); ?>
 
         <!-- Main Content -->

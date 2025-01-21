@@ -29,7 +29,7 @@ class RepositoryGenerator{
         }
     }
     public function create($table){
-var_dump($table);
+// var_dump($table);
         return $table->create();
   }
   public function delete($table,$id){
@@ -37,7 +37,6 @@ var_dump($table);
     return $table->delete($id);
 }
 public function FindCoursById($table,$id){
-// var_dump($table);
     return $table->FindById($id);
 }
 public function update($table,$id){
@@ -105,22 +104,22 @@ public function findrolebyName($value,$table) {
         }
     }
 public function findByField(string $field, $value,$table) {
-//    echo $field, $value,$table;
+    echo $field, $value,$table;
     $sql = "SELECT * FROM $table WHERE $field ='".$value."'";
-//  var_dump($sql);
+ echo($sql);
     try {
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
-        // var_dump($stmt);
-        if ($table !== 'cours') {
+      
+        if ($table !== 'cours' &&$table !== 'inscription') {
             $class = ucfirst(substr($table, 0, -1));            
-            // var_dump($class);
+            
         }else{
             $class = ucfirst($table);            
 
         }
         $result= $stmt->fetchAll(PDO::FETCH_CLASS,$class);
-        // var_dump($result);
+    //   var_dump($result);
         return $result;
 
     } catch (Exception $e) {

@@ -16,7 +16,7 @@
     <div class="container">
      
             <?php 
-            include("../views/components/SideBarEnseignant.php");
+            include("../views/components/SideBarEtudiant.php");
             ?>
               
    </div>

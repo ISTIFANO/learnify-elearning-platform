@@ -26,7 +26,7 @@ class AuthController
                'role' => $user->getRole()->getRoleName(),
                'status' => $user->getIsValide()
             ];
-            var_dump($_SESSION['user']);
+             var_dump($_SESSION['user']);
             // Redirect based on role
             switch ($user->getRole()->getRoleName()) {
                case 'ADMIN':
@@ -36,7 +36,7 @@ class AuthController
                   header('Location: /DashboardEnseignant');
                   break;
                case 'STUDENT':
-                  header('Location: /');
+                  header('Location: /DashboardEtudiant');
                   break;
                default:
                   header('Location: /');
